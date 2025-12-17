@@ -1,19 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { Mail, Heart } from 'lucide-react';
 import { toast } from './ui/use-toast';
+import GithubIcon from '../assets/GithubIcon';
+import LinkedinIcon from '../assets/LinkedinIcon';
 
 const Footer = ({ language }) => {
   const translations = {
     en: {
       rights: "All rights reserved.",
       madeWith: "Made with",
-      by: "by John Developer"
+      by: "by Halil İbrahim Koçoğlu"
     },
     tr: {
       rights: "Tüm hakları saklıdır.",
       madeWith: "ile yapıldı",
-      by: "John Developer tarafından"
+      by: "Halil İbrahim Koçoğlu tarafından"
     }
   };
 
@@ -41,9 +43,15 @@ const Footer = ({ language }) => {
             <p className="text-gray-400">
               © {currentYear} Portfolio. {t.rights}
             </p>
+            {language === "en" ?
             <p className="text-gray-500 text-sm mt-1 flex items-center justify-center md:justify-start gap-1">
               {t.madeWith} <Heart className="w-4 h-4 text-pink-500 fill-pink-500" /> {t.by}
             </p>
+            :
+            <p className="text-gray-500 text-sm mt-1 flex items-center justify-center md:justify-start gap-1">
+              {t.by} <Heart className="w-4 h-4 text-pink-500 fill-pink-500" /> {t.madeWith}
+            </p>
+            }
           </motion.div>
 
           <motion.div
@@ -54,20 +62,22 @@ const Footer = ({ language }) => {
             className="flex gap-4"
           >
             {[
-              { icon: Github, label: 'GitHub' },
-              { icon: Linkedin, label: 'LinkedIn' },
-              { icon: Mail, label: 'Email' }
+              { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/halilkocoglu' },
+              { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/halilkocoglu/' },
+              { icon: Mail, label: 'Email', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=halilkocoglu98@gmail.com' }
             ].map((social, index) => (
-              <motion.button
+              <motion.a
                 key={index}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleSocialClick(social.label)}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
                 aria-label={social.label}
               >
                 <social.icon size={18} />
-              </motion.button>
+              </motion.a>
             ))}
           </motion.div>
         </div>
