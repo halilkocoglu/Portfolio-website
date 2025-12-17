@@ -31,7 +31,7 @@ const Hero = ({ language }) => {
   const handleDownloadCV = () => {
     toast({
       title: "🚧 Feature Coming Soon!",
-      description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
+      description: "🚧 This feature isn't implemented yet—but don't worry!  🚀"
     });
   };
 
@@ -114,7 +114,7 @@ const Hero = ({ language }) => {
               {[
                 { icon: GithubIcon, href: 'https://github.com/halilkocoglu' },
                 { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/halilkocoglu/' },
-                { icon: Mail, href: '#' }
+                { icon: Mail, href: 'https://mail.google.com/mail/?view=cm&fs=1&to=halilkocoglu98@gmail.com' }
               ].map((social, index) => (
                 <motion.a
                   key={index}
@@ -140,7 +140,7 @@ const Hero = ({ language }) => {
             <div className="relative w-full aspect-square max-w-lg mx-auto">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl opacity-30 animate-pulse"></div>
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-purple-400/30">
-                <img alt="Professional web developer portrait" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1603969409447-ba86143a03f6" />
+                <img alt="Professional web developer portrait" className="w-full h-full object-cover" src="/ProfilePicture.jpeg" />
               </div>
             </div>
           </motion.div>
