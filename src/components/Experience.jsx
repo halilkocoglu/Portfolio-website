@@ -9,26 +9,19 @@ const Experience = ({ language }) => {
       subtitle: "My professional journey",
       experiences: [
         {
-          company: "Tech Solutions Inc.",
-          position: "Senior Full Stack Developer",
-          period: "2021 - Present",
-          description: "Leading development of enterprise web applications using React, Node.js, and cloud technologies. Mentoring junior developers and establishing best practices.",
-          technologies: ["React", "Node.js", "AWS", "PostgreSQL"]
-        },
-        {
-          company: "Digital Agency Pro",
+          company: "Genç Data Bilişim-Computer,Security and Software Solutions",
           position: "Full Stack Developer",
-          period: "2019 - 2021",
-          description: "Developed responsive websites and web applications for various clients. Collaborated with design teams to create engaging user experiences.",
-          technologies: ["React", "Express", "MongoDB", "TailwindCSS"]
+          period: "01/2025 - Present",
+          description: "Leading development of enterprise web applications using React, Java, and cloud technologies. Establishing best practices.In addition to software excellence, overseeing technical infrastructure, including computer and printer maintenance and the end-to-end installation of security camera systems.",
+          technologies: ["React", "Java", "Bootstrap", "PostgreSQL", "Hosting","Github Actions","Docker", "JWT","WebSocket","REST API","CI/CD","Cloud Deployment","Performance Optimization","Security Best Practices"]
         },
         {
-          company: "StartUp Ventures",
-          position: "Frontend Developer",
-          period: "2017 - 2019",
-          description: "Built modern single-page applications and implemented responsive designs. Worked closely with UX designers to create intuitive interfaces.",
-          technologies: ["Vue.js", "JavaScript", "CSS3", "REST APIs"]
-        }
+          company: "İstanbul Kodluyor-Tobeto (Remote)",
+          position: "Full Stack Developer",
+          period: "09/2023 - 04/2024",
+          description: "Developed responsive websites and web applications for various clients. Collaborated with design teams to create engaging user experiences.",
+          technologies: ["React", "Java", "PostgreSQL", "Bootstrap"]
+        },
       ]
     },
     tr: {
@@ -36,25 +29,18 @@ const Experience = ({ language }) => {
       subtitle: "Profesyonel yolculuğum",
       experiences: [
         {
-          company: "Tech Solutions Inc.",
-          position: "Kıdemli Full Stack Geliştirici",
-          period: "2021 - Şu an",
-          description: "React, Node.js ve bulut teknolojileri kullanarak kurumsal web uygulamalarının geliştirilmesine liderlik ediyorum. Genç geliştiricilere mentorluk yapıyorum ve en iyi uygulamaları belirliyorum.",
-          technologies: ["React", "Node.js", "AWS", "PostgreSQL"]
-        },
-        {
-          company: "Digital Agency Pro",
+          company: "Genç Data Bilişim-Bilgisayar, Güvenlik ve Yazılım Çözümleri",
           position: "Full Stack Geliştirici",
-          period: "2019 - 2021",
-          description: "Çeşitli müşteriler için duyarlı web siteleri ve web uygulamaları geliştirdim. Tasarım ekipleriyle işbirliği yaparak ilgi çekici kullanıcı deneyimleri oluşturdum.",
-          technologies: ["React", "Express", "MongoDB", "TailwindCSS"]
+          period: "01/2025 - Şu an",
+          description: "React, Java ve bulut teknolojilerini kullanarak kurumsal web uygulamalarının geliştirilmesine liderlik ediyor ve en iyi uygulama (best practices) standartlarını oluşturuyorum. Yazılımdaki uzmanlığımın yanı sıra; bilgisayar ve yazıcı bakımı ile güvenlik kamerası sistemlerinin uçtan uca kurulumunu da kapsayan teknik altyapı süreçlerini yönetiyorum.",
+          technologies: ["React", "Java", "Bootstrap", "PostgreSQL", "Hosting", "Github Actions","Docker", "JWT","WebSocket","REST API","CI/CD","Cloud Deployment","Performans Optimizasyonu"]
         },
         {
-          company: "StartUp Ventures",
-          position: "Frontend Geliştirici",
-          period: "2017 - 2019",
-          description: "Modern tek sayfalı uygulamalar geliştirdim ve duyarlı tasarımlar uyguladım. Sezgisel arayüzler oluşturmak için UX tasarımcılarıyla yakın çalıştım.",
-          technologies: ["Vue.js", "JavaScript", "CSS3", "REST APIs"]
+          company: "İstanbul Kodluyor-Tobeto (Uzaktan)",
+          position: "Full Stack Geliştirici",
+          period: "09/2023 - 04/2024",
+          description: "Çeşitli müşteriler için duyarlı web siteleri ve web uygulamaları geliştirdim. Tasarım ekipleriyle işbirliği yaparak ilgi çekici kullanıcı deneyimleri oluşturdum.",
+          technologies: ["React", "Java", "Bootstrap", "PostgreSQL"]
         }
       ]
     }
