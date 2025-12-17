@@ -23,17 +23,17 @@ const Contact = ({ language }) => {
         {
           icon: Mail,
           label: "Email",
-          value: "hello@developer.com"
+          value: "halilkocoglu98@gmail.com"
         },
         {
           icon: Phone,
           label: "Phone",
-          value: "+1 234 567 8900"
+          value: "+90 533 947 52 17"
         },
         {
           icon: MapPin,
           label: "Location",
-          value: "San Francisco, CA"
+          value: "AYDIN, TURKEY"
         }
       ]
     },
@@ -48,17 +48,17 @@ const Contact = ({ language }) => {
         {
           icon: Mail,
           label: "E-posta",
-          value: "hello@developer.com"
+          value: "halilkocoglu98@gmail.com"
         },
         {
           icon: Phone,
           label: "Telefon",
-          value: "+1 234 567 8900"
+          value: "+90 533 947 52 17"
         },
         {
           icon: MapPin,
           label: "Konum",
-          value: "San Francisco, CA"
+          value: "AYDIN, TÜRKİYE"
         }
       ]
     }
