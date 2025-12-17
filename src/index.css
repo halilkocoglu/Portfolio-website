@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Genel Arkaplan ve Önplan Renkleri */
+    --background: 222.2 84% 4.9%;    /* Çok Koyu Mavi/Lacivert */
+    --foreground: 210 40% 98%;      /* Açık Beyaz */
+
+    /* Birincil Renk (Mor/Eflatun - Sitenizin gradyanına uygun) */
+    --primary: 271 76% 53%;         /* Parlak Mor (#a855f7) */
+    --primary-foreground: 210 40% 98%; /* Primary üzerinde Beyaz metin */
+
+    /* İkincil Renk (Genellikle daha sakin, gri tonlu) */
+    --secondary: 217.2 32.4% 17.5%; /* Koyu Gri Mavi */
+    --secondary-foreground: 210 40% 98%;
+
+    /* Vurgu (Highlight) Renkleri */
+    --accent: 271 76% 40%;          /* Koyu Mor */
+    --accent-foreground: 210 40% 98%;
+
+    /* Kart ve Popover Arkaplanları (Arkaplandan biraz daha açık/farklı) */
+    --card: 222.2 84% 6.9%;         /* Koyu kart arkaplanı */
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 6.9%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Sınır, Giriş Alanı ve Odak Çevresi Renkleri */
+    --border: 217.2 32.4% 27.5%;     /* Orta Koyu Gri sınır */
+    --input: 217.2 32.4% 27.5%;      /* Giriş alanı arkaplanı */
+    --ring: 271 76% 53%;             /* Odak halkası (primary rengi) */
+
+    /* Sessiz (Muted) Renkler (İkincil metinler, açıklamalar) */
+    --muted: 217.2 32.4% 37.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    /* Yıkıcı (Hata/Tehlike) Renk */
+    --destructive: 0 62.8% 30.6%;   /* Kırmızı */
+    --destructive-foreground: 210 40% 98%;
+
+    /* Ayrıca tailwind.config.cjs'de kullanılan bu değişkeni de tanımlayalım */
+    --radius: 0.5rem;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0f172a;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a855f7 0%, #ec4899 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9333ea 0%, #db2777 100%);
+}
+
+/* Animations */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #a855f7;
+  outline-offset: 2px;
+}
