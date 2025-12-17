@@ -13,16 +13,16 @@ const Projects = ({ language }) => {
       viewCode: "View Code",
       projects: [
         {
-          title: "E-Commerce Platform",
-          description: "A full-featured online shopping platform with cart, checkout, and payment integration.",
-          technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-          image: "Modern e-commerce website showing product catalog and shopping cart"
+          title: "ATM Wire Business Management System",
+          description: "Comprehensive business management platform with order, inventory, and customer management features.",
+          technologies: ["React", "Java", "PostgreSQL", "Hosting", "Docker", "JWT", "WebSocket", "REST API", "CI/CD", "Cloud Deployment"],
+          image: "ATM wire business management system interface"
         },
         {
-          title: "Task Management App",
-          description: "Collaborative task management tool with real-time updates and team features.",
-          technologies: ["React", "Firebase", "TailwindCSS", "WebSocket"],
-          image: "Task management dashboard with kanban board and team collaboration"
+          title: "Car Rental Web Application",
+          description: "Integrated reservation, fleet tracking, and customer management system for end-to-end car rental solution.",
+          technologies: ["React", "Java", "PostgreSQL", "WebSocket", "REST API", "JWT", "Spring Boot", "JPA", "Bootstrap", "i18next", "Git", "Github"],
+          image: "Car rental web application interface"
         },
         {
           title: "Social Media Dashboard",
@@ -57,16 +57,16 @@ const Projects = ({ language }) => {
       viewCode: "Kodu Görüntüle",
       projects: [
         {
-          title: "E-Ticaret Platformu",
-          description: "Sepet, ödeme ve ödeme entegrasyonlu tam özellikli online alışveriş platformu.",
-          technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-          image: "Modern e-ticaret web sitesi ürün kataloğu ve alışveriş sepeti gösterimi"
+          title: "ATM Tel örgü İş Yönetim Sistemi",
+          description: "Sipariş, envanter ve müşteri yönetimi özelliklerine sahip kapsamlı bir iş yönetim platformu.",
+          technologies: ["React", "Java", "PostgreSQL", "Hosting", "Docker", "JWT", "WebSocket", "REST API", "CI/CD", "Cloud Deployment"],
+          image: "ATM tel örgü iş yönetim sistemi arayüzü"
         },
         {
-          title: "Görev Yönetim Uygulaması",
-          description: "Gerçek zamanlı güncellemeler ve takım özellikleri ile işbirlikli görev yönetim aracı.",
-          technologies: ["React", "Firebase", "TailwindCSS", "WebSocket"],
-          image: "Kanban panosu ve takım işbirliği ile görev yönetim paneli"
+          title: "Araç Kiralama Web Uygulaması",
+          description: "Entegre rezervasyon, filo takibi ve müşteri yönetim sistemlerine sahip uçtan uca araç kiralama çözümü.",
+          technologies: ["React", "Java", "PostgreSQL", "WebSocket", "REST API", "JWT", "Spring Boot", "JPA", "Bootstrap", "i18next", "Git", "Github"],
+          image: "Araç kiralama web uygulaması arayüzü"
         },
         {
           title: "Sosyal Medya Panosu",
@@ -135,6 +135,7 @@ const Projects = ({ language }) => {
             >
               <div className="relative h-48 overflow-hidden">
                 <img alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="https://images.unsplash.com/photo-1572177812156-58036aae439c" />
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
               </div>
 
