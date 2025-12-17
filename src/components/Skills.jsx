@@ -11,32 +11,32 @@ const Skills = ({ language }) => {
         {
           icon: Code,
           title: "Frontend",
-          skills: ["React", "Vue.js", "Next.js", "TailwindCSS", "JavaScript", "TypeScript"]
+          skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "i18next", "Framer Motion", "Three.js", "Chakra UI", "Material-UI", "Vite", "ESLint", "Prettier", "Chart.js", "Responsive Design", "Performance Optimization", "SEO Best Practices"]
         },
         {
           icon: Server,
           title: "Backend",
-          skills: ["Node.js", "Express", "Python", "Django", "REST APIs", "GraphQL"]
+          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices", "CI/CD", "Containerization (Docker)", "Version Control (Git)","DevOps Practices", "Database Design", "Database Optimization"]
         },
         {
           icon: Database,
           title: "Database",
-          skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase", "Supabase"]
+          skills: ["MongoDB", "PostgreSQL", "MySQL"]
         },
         {
           icon: Tool,
           title: "DevOps",
-          skills: ["Git", "Docker", "AWS", "CI/CD", "Linux", "Nginx"]
+          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services"]
         },
-        {
-          icon: Smartphone,
-          title: "Mobile",
-          skills: ["React Native", "PWA", "Responsive Design", "Mobile-First"]
-        },
+        // {
+        //   icon: Smartphone,
+        //   title: "Mobile",
+        //   skills: ["React Native", "PWA", "Responsive Design", "Mobile-First"]
+        // },
         {
           icon: Layout,
           title: "Design",
-          skills: ["UI/UX", "Figma", "Adobe XD", "Wireframing", "Prototyping"]
+          skills: ["UI/UX", "Figma", "Adobe XD"]
         }
       ]
     },
@@ -47,32 +47,32 @@ const Skills = ({ language }) => {
         {
           icon: Code,
           title: "Frontend",
-          skills: ["React", "Vue.js", "Next.js", "TailwindCSS", "JavaScript", "TypeScript"]
+          skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "i18next", "Framer Motion", "Three.js", "Chakra UI", "Material-UI", "Vite", "ESLint", "Prettier", "Chart.js", "Duyarlı Tasarım", "Performans Optimizasyonu", "SEO En İyi Uygulamaları"]
         },
         {
           icon: Server,
           title: "Backend",
-          skills: ["Node.js", "Express", "Python", "Django", "REST APIs", "GraphQL"]
+          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices", "CI/CD", "Containerization (Docker)", "Version Control (Git)","DevOps Practices", "Database Design", "Database Optimization"]
         },
         {
           icon: Database,
           title: "Veritabanı",
-          skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase", "Supabase"]
+          skills: ["MongoDB", "PostgreSQL", "MySQL"]
         },
         {
           icon: Tool,
           title: "DevOps",
-          skills: ["Git", "Docker", "AWS", "CI/CD", "Linux", "Nginx"]
+          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services"]
         },
-        {
-          icon: Smartphone,
-          title: "Mobil",
-          skills: ["React Native", "PWA", "Duyarlı Tasarım", "Mobil-İlk"]
-        },
+        // {
+        //   icon: Smartphone,
+        //   title: "Mobil",
+        //   skills: ["React Native", "PWA", "Duyarlı Tasarım", "Mobil-İlk"]
+        // },
         {
           icon: Layout,
           title: "Tasarım",
-          skills: ["UI/UX", "Figma", "Adobe XD", "Tel Çerçeve", "Prototipleme"]
+          skills: ["UI/UX", "Figma", "Adobe XD"]
         }
       ]
     }
