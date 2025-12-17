@@ -34,7 +34,7 @@ const About = ({ language }) => {
     tr: {
       title: "Hakkımda",
       subtitle: "Dijital deneyimler yaratma tutkusu",
-      description: "Karmaşık problemlere zarif çözümler üretme tutkusuyla çalışan tam yığın web geliştiricisiyim. Modern web teknolojilerinde yıllarca deneyimle, fark yaratan duyarlı ve kullanıcı dostu uygulamalar geliştirme konusunda uzmanım.",
+      description: "Karmaşık problemlere zarif çözümler üretme tutkusuyla çalışan full stack web geliştiricisiyim. Modern web teknolojilerinde yıllarca deneyimle, fark yaratan duyarlı ve kullanıcı dostu uygulamalar geliştirme konusunda uzmanım.",
       highlights: [
         {
           icon: Code2,
