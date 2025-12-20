@@ -5,17 +5,17 @@ import { Code, Database, Layout, Server, Smartphone, Wrench as Tool } from 'luci
 const Skills = ({ language }) => {
   const translations = {
     en: {
-      title: "Skills",
-      subtitle: "Technologies I work with",
+      title: "Technical Expertise",
+      subtitle: "Full-Stack Development & Modern Web Technologies",
       categories: [
         {
           icon: Code,
-          title: "Frontend",
+          title: "Frontend Development",
           skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "i18next", "Framer Motion", "Three.js", "Chakra UI", "Material-UI", "Vite", "ESLint", "Prettier", "Chart.js", "Responsive Design", "Performance Optimization", "SEO Best Practices"]
         },
         {
           icon: Server,
-          title: "Backend",
+          title: "Backend & API Architecture",
           skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices", "CI/CD", "Containerization (Docker)", "Version Control (Git)","DevOps Practices", "Database Design", "Database Optimization"]
         },
         {
@@ -25,7 +25,7 @@ const Skills = ({ language }) => {
         },
         {
           icon: Tool,
-          title: "DevOps",
+          title: "Cloud & DevOps Solutions",
           skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services"]
         },
         // {
@@ -41,17 +41,17 @@ const Skills = ({ language }) => {
       ]
     },
     tr: {
-      title: "Yetenekler",
-      subtitle: "Çalıştığım teknolojiler",
+      title: "Teknik Yetkinlikler",
+      subtitle: "Full-Stack Geliştirme ve Modern Web Teknolojileri",
       categories: [
         {
           icon: Code,
-          title: "Frontend",
+          title: "Frontend (Önyüz) Geliştirme",
           skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "i18next", "Framer Motion", "Three.js", "Chakra UI", "Material-UI", "Vite", "ESLint", "Prettier", "Chart.js", "Duyarlı Tasarım", "Performans Optimizasyonu", "SEO En İyi Uygulamaları"]
         },
         {
           icon: Server,
-          title: "Backend",
+          title: "Backend & API Mimarisi",
           skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices", "CI/CD", "Containerization (Docker)", "Version Control (Git)","DevOps Practices", "Database Design", "Database Optimization"]
         },
         {
@@ -61,7 +61,7 @@ const Skills = ({ language }) => {
         },
         {
           icon: Tool,
-          title: "DevOps",
+          title: "DevOps & Bulut Çözümleri",
           skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services"]
         },
         // {
@@ -116,16 +116,16 @@ const Skills = ({ language }) => {
 
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
-                  <motion.span
+                  <motion.li
                     key={skillIndex}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: skillIndex * 0.05 }}
                     viewport={{ once: true }}
-                    className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30 hover:bg-purple-500/30 transition-colors duration-300"
+                    className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30 hover:bg-purple-500/30 transition-colors duration-300 list-none"
                   >
                     {skill}
-                  </motion.span>
+                  </motion.li>
                 ))}
               </div>
             </motion.div>
