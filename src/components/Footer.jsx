@@ -8,26 +8,20 @@ import LinkedinIcon from '../assets/LinkedinIcon';
 const Footer = ({ language }) => {
   const translations = {
     en: {
-      rights: "All rights reserved.",
-      madeWith: "Made with",
-      by: "by Halil İbrahim Koçoğlu"
+      rights: "All rights reserved. | Professional Web Design & Software Solutions",
+      madeWith: "Crafted with",
+      by: "Halil İbrahim Koçoğlu"
     },
     tr: {
-      rights: "Tüm hakları saklıdır.",
-      madeWith: "ile yapıldı",
-      by: "Halil İbrahim Koçoğlu tarafından"
+      rights: "Tüm hakları saklıdır. | Profesyonel Web Tasarım ve Yazılım Çözümleri",
+      madeWith: "ile geliştirildi",
+      by: "Halil İbrahim Koçoğlu"
     }
   };
 
   const t = translations[language];
   const currentYear = new Date().getFullYear();
 
-  const handleSocialClick = (platform) => {
-    toast({
-      title: "🚧 Social Link",
-      description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-  };
 
   return (
     <footer className="bg-slate-900/80 backdrop-blur-md border-t border-purple-500/20 py-8 px-4">
