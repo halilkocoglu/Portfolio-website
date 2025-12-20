@@ -6,41 +6,41 @@ const Experience = ({ language }) => {
   const translations = {
     en: {
       title: "Experience",
-      subtitle: "My professional journey",
+      subtitle: "Professional Software Engineering & Technical Solutions", 
       experiences: [
         {
-          company: "Genç Data Bilişim-Computer,Security and Software Solutions",
-          position: "Full Stack Developer",
+          company: "Genç Data Bilişim - Software & Security Solutions",
+          position: "Full Stack Software Developer",
           period: "01/2025 - Present",
-          description: "Leading development of enterprise web applications using React, Java, and cloud technologies. Establishing best practices.In addition to software excellence, overseeing technical infrastructure, including computer and printer maintenance and the end-to-end installation of security camera systems.",
-          technologies: ["React", "Java", "Bootstrap", "PostgreSQL", "Hosting","Github Actions","Docker", "JWT","WebSocket","REST API","CI/CD","Cloud Deployment","Performance Optimization","Security Best Practices"]
+          description: "Providing end-to-end digital solutions including custom corporate web applications using Java Spring Boot and React. Beyond software, I manage technical infrastructure projects, including server maintenance and professional security camera system installations for businesses.",
+          technologies: ["React", "Java", "Spring Boot", "Docker", "CI/CD", "Security Systems", "Network Infrastructure"]
         },
         {
-          company: "İstanbul Kodluyor-Tobeto (Remote)",
-          position: "Full Stack Developer",
+          company: "İstanbul Kodluyor - Tobeto (Remote)",
+          position: "Full Stack Web Developer",
           period: "09/2023 - 04/2024",
-          description: "Developed responsive websites and web applications for İstanbul Kodluyor projects. Collaborated with design teams to create engaging user experiences.",
-          technologies: ["React", "Java", "PostgreSQL", "Bootstrap"]
+          description: "Developed high-performance, responsive web applications and SEO-friendly interfaces. Participated in the complete software development lifecycle (SDLC) from database design to frontend deployment.",
+          technologies: ["React", "Java", "Spring Boot", "PostgreSQL", "JPA", "Responsive Design"]
         },
       ]
     },
     tr: {
       title: "Deneyim",
-      subtitle: "Profesyonel yolculuğum",
+      subtitle: "Profesyonel Yazılım Mühendisliği ve Teknik Çözümler",
       experiences: [
         {
-          company: "Genç Data Bilişim-Bilgisayar, Güvenlik ve Yazılım Çözümleri",
+          company: "Genç Data Bilişim - Yazılım ve Güvenlik Çözümleri",
           position: "Full Stack Geliştirici",
           period: "01/2025 - Şu an",
-          description: "React, Java ve bulut teknolojilerini kullanarak kurumsal web uygulamalarının geliştirilmesine liderlik ediyor ve en iyi uygulama (best practices) standartlarını oluşturuyorum. Yazılımdaki uzmanlığımın yanı sıra; bilgisayar ve yazıcı bakımı ile güvenlik kamerası sistemlerinin uçtan uca kurulumunu da kapsayan teknik altyapı süreçlerini yönetiyorum.",
-          technologies: ["React", "Java", "Bootstrap", "PostgreSQL", "Hosting", "Github Actions","Docker", "JWT","WebSocket","REST API","CI/CD","Cloud Deployment","Performans Optimizasyonu"]
+          description: "Java Spring Boot ve React kullanarak kurumsal web uygulamaları ve özel yazılım çözümleri geliştiriyorum. Yazılım süreçlerinin yanı sıra, işletmeler için kritik teknik altyapı yönetimi ve profesyonel güvenlik kamerası sistemleri kurulumu hizmetlerini koordine ediyorum.",
+          technologies: ["React", "Java", "Spring Boot", "Docker", "CI/CD", "Güvenlik Sistemleri", "Ağ Altyapısı", "PostgreSQL"]
         },
         {
-          company: "İstanbul Kodluyor-Tobeto (Uzaktan)",
+          company: "İstanbul Kodluyor - Tobeto (Uzaktan)",
           position: "Full Stack Geliştirici",
           period: "09/2023 - 04/2024",
-          description: "İstanbul Kodluyor projesi için duyarlı web siteleri ve web uygulamaları geliştirdim. Tasarım ekipleriyle işbirliği yaparak ilgi çekici kullanıcı deneyimleri oluşturdum.",
-          technologies: ["React", "Java", "Bootstrap", "PostgreSQL"]
+          description: "Yüksek performanslı, duyarlı ve SEO uyumlu web arayüzleri geliştirdim. Veritabanı tasarımından canlıya alım süreçlerine kadar tam kapsamlı yazılım geliştirme projelerinde yer aldım.",
+          technologies: ["React", "Java", "Spring Boot", "PostgreSQL", "Responsive Tasarım"]
         }
       ]
     }
@@ -90,7 +90,7 @@ const Experience = ({ language }) => {
                   </div>
                   <div className="flex items-center gap-2 text-gray-400">
                     <Calendar className="w-4 h-4" />
-                    <span className="text-sm">{exp.period}</span>
+                    <time className="text-sm">{exp.period}</time>
                   </div>
                 </div>
 
