@@ -19,7 +19,7 @@ const Experience = ({ language }) => {
           company: "İstanbul Kodluyor-Tobeto (Remote)",
           position: "Full Stack Developer",
           period: "09/2023 - 04/2024",
-          description: "Developed responsive websites and web applications for various clients. Collaborated with design teams to create engaging user experiences.",
+          description: "Developed responsive websites and web applications for İstanbul Kodluyor projects. Collaborated with design teams to create engaging user experiences.",
           technologies: ["React", "Java", "PostgreSQL", "Bootstrap"]
         },
       ]
@@ -39,7 +39,7 @@ const Experience = ({ language }) => {
           company: "İstanbul Kodluyor-Tobeto (Uzaktan)",
           position: "Full Stack Geliştirici",
           period: "09/2023 - 04/2024",
-          description: "Çeşitli müşteriler için duyarlı web siteleri ve web uygulamaları geliştirdim. Tasarım ekipleriyle işbirliği yaparak ilgi çekici kullanıcı deneyimleri oluşturdum.",
+          description: "İstanbul Kodluyor projesi için duyarlı web siteleri ve web uygulamaları geliştirdim. Tasarım ekipleriyle işbirliği yaparak ilgi çekici kullanıcı deneyimleri oluşturdum.",
           technologies: ["React", "Java", "Bootstrap", "PostgreSQL"]
         }
       ]
