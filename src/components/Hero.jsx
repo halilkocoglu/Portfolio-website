@@ -11,29 +11,23 @@ const Hero = ({ language }) => {
     en: {
       greeting: "Hi, I'm",
       name: "Halil İbrahim Koçoğlu",
-      title: "Full Stack Web Developer",
-      description: "I create beautiful and functional web experiences with modern technologies.",
-      viewProjects: "View My Work",
+      title: "Full Stack Web Developer & Software Solutions", 
+      description: "I specialize in building high-performance web applications and custom corporate websites using modern technologies like React and Spring Boot.",
+      viewProjects: "View My Projects",
       downloadCV: "Download CV"
     },
     tr: {
       greeting: "Merhaba, Ben",
       name: "Halil İbrahim Koçoğlu",
-      title: "Full Stack Web Geliştirici",
-      description: "Modern teknolojilerle güzel ve işlevsel web deneyimleri oluşturuyorum.",
-      viewProjects: "Çalışmalarımı Görüntüle",
+      title: "Full Stack Web Geliştirici & Yazılım Çözümleri", 
+      description: "Modern teknolojilerle yüksek performanslı web uygulamaları ve ihtiyaca özel kurumsal web sitesi çözümleri sunuyorum.",
+      viewProjects: "Projelerimi İnceleyin",
       downloadCV: "CV İndir"
     }
   };
 
   const t = translations[language];
 
-  const handleDownloadCV = () => {
-    toast({
-      title: "🚧 Feature Coming Soon!",
-      description: "🚧 This feature isn't implemented yet—but don't worry!  🚀"
-    });
-  };
 
   const scrollToProjects = () => {
     const element = document.getElementById('projects');
@@ -96,14 +90,22 @@ const Hero = ({ language }) => {
               >
                 {t.viewProjects}
               </Button>
-              <Button
-                onClick={handleDownloadCV}
-                variant="custom-bg"
-                className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white px-8 py-6 text-lg"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                {t.downloadCV}
-              </Button>
+              <motion.a
+              href={language === 'tr' ? '/Halil_Ibrahim_Kocoglu_TR.pdf' : '/Halil_Ibrahim_Kocoglu_EN.pdf'}
+              download={`Halil_Ibrahim_Kocoglu_CV_${language.toUpperCase()}.pdf`}
+              aria-label={t.downloadCV}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+                <Button
+                  variant="custom-bg"
+                  className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white px-8 py-6 text-lg"
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  {t.downloadCV}
+                </Button>
+              </motion.a>
+
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -112,13 +114,14 @@ const Hero = ({ language }) => {
               className="flex gap-4"
             >
               {[
-                { icon: GithubIcon, href: 'https://github.com/halilkocoglu' },
-                { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/halilkocoglu/' },
-                { icon: Mail, href: 'https://mail.google.com/mail/?view=cm&fs=1&to=halilkocoglu98@gmail.com' }
+                { icon: GithubIcon, href: 'https://github.com/halilkocoglu', label: 'GitHub' },
+                { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/halilkocoglu/', label: 'LinkedIn' },
+                { icon: Mail, href: 'https://mail.google.com/mail/?view=cm&fs=1&to=halilkocoglu98@gmail.com', label: 'Email' },
               ].map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.href}
+                  aria-label={social.label}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
@@ -140,7 +143,10 @@ const Hero = ({ language }) => {
             <div className="relative w-full aspect-square max-w-lg mx-auto">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl opacity-30 animate-pulse"></div>
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-purple-400/30">
-                <img alt="Professional web developer portrait" className="w-full h-full object-cover" src="/ProfilePicture.jpeg" />
+                <img 
+                alt={`Halil İbrahim Koçoğlu -${language === 'tr' ? 'Web Sitesi Yapımı ve Yazılım Çözümleri' : ' Full Stack Web Developer & Software Solutions'} `} 
+                className="w-full h-full object-cover" 
+                src="/ProfilePicture.jpeg" />
               </div>
             </div>
           </motion.div>
