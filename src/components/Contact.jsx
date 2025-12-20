@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import { Button } from './ui/button';
 import { toast } from './ui/use-toast';
 
 const Contact = ({ language }) => {
@@ -9,12 +8,8 @@ const Contact = ({ language }) => {
 
   const translations = {
     en: {
-      title: "Get In Touch",
-      subtitle: "Let's work together",
-      namePlaceholder: "Your Name",
-      emailPlaceholder: "Your Email",
-      messagePlaceholder: "Your Message",
-      sendButton: "Send Message",
+      title: "Contact For Web Solutions", 
+      subtitle: "Professional Web Design & Software Development Services",
       contactInfo: [
         {
           icon: Mail,
@@ -23,23 +18,19 @@ const Contact = ({ language }) => {
         },
         {
           icon: Phone,
-          label: "Phone",
+          label: "Direct Phone",
           value: "+90 533 947 52 17"
         },
         {
           icon: MapPin,
-          label: "Location",
-          value: "AYDIN, TURKEY"
+          label: "Service Area",
+          value: "Aydın, Turkey (Remote & On-site)"
         }
       ]
     },
     tr: {
-      title: "İletişime Geçin",
-      subtitle: "Birlikte çalışalım",
-      namePlaceholder: "Adınız",
-      emailPlaceholder: "E-posta Adresiniz",
-      messagePlaceholder: "Mesajınız",
-      sendButton: "Mesaj Gönder",
+      title: "Yazılım Çözümleri İçin İletişim",
+      subtitle: "Profesyonel Web Tasarım ve Yazılım Geliştirme Hizmetleri",
       contactInfo: [
         {
           icon: Mail,
@@ -53,8 +44,8 @@ const Contact = ({ language }) => {
         },
         {
           icon: MapPin,
-          label: "Konum",
-          value: "AYDIN, TÜRKİYE"
+          label: "Hizmet Bölgesi",
+          value: "Aydın, Türkiye (Uzaktan & Yerinde)"
         }
       ]
     }
@@ -62,16 +53,9 @@ const Contact = ({ language }) => {
 
   const t = translations[language];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    toast({
-      title: "🚧 Contact Form",
-      description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-  };
 
   const handleCopy = (value, label) => {
-    if(label !== "Location" && label !== "Konum") {
+    if(label !== "Service Area" && label !== "Hizmet Bölgesi") {
       navigator.clipboard.writeText(value);
       toast({
         title: language === 'tr' ? "🚧 Kopyalandı! 🚧" : "🚧 Copied! 🚧",
@@ -123,7 +107,7 @@ const Contact = ({ language }) => {
                   <div>
                     <p className="text-gray-400 text-sm">{info.label}</p>
                     <p className="text-white font-semibold">{info.value}</p>
-                    {(info.label !== "Location" && info.label !== "Konum") && <p className="text-white text-muted text-xs">{language === 'tr' ? 'Kopyalamak için tıklayın' : 'Click to copy'}</p>}
+                    {(info.label !== "Service Area" && info.label !== "Hizmet Bölgesi") && <p className="text-white text-muted text-xs">{language === 'tr' ? 'Kopyalamak için tıklayın' : 'Click to copy'}</p>}
                   </div>
                 </motion.div>
               ))}
