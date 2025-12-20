@@ -9,26 +9,26 @@ const Projects = ({ language }) => {
   const translations = {
     en: {
       title: "Projects",
-      subtitle: "Some of my recent work",
-      viewLive: "View Details",
-      viewCode: "View Code",
+      subtitle: "Custom Software Solutions & Web Applications", // Daha profesyonel alt başlık
+      viewLive: "Project Details",
+      viewCode: "Source Code",
       projects: [
         {
-          title: "ATM Wire Business Management System",
-          description: "Comprehensive business management platform with order, inventory, and customer management features.",
-          technologies: ["React", "Java", "PostgreSQL", "Hosting", "Docker", "JWT", "WebSocket", "REST API", "CI/CD", "Cloud Deployment"],
+          title: "ATM Wire Business Management System (CMS)",
+          description: "An enterprise-level CMS and inventory management platform. Includes automated order tracking and secure customer data management built with Java and React.",
+          technologies: ["React", "Java Spring Boot", "PostgreSQL", "Docker", "REST API", "Cloud"],
           image: "/ATM-logo.png"
         },
         {
-          title: "Car Rental Web Application",
-          description: "Integrated reservation, fleet tracking, and customer management system for end-to-end car rental solution.",
-          technologies: ["React", "Java", "PostgreSQL", "WebSocket", "REST API", "JWT", "Spring Boot", "JPA", "Bootstrap", "i18next", "Git", "Github"],
+          title: "Full-Stack Car Rental Application",
+          description: "A comprehensive car rental solution with integrated reservation systems, fleet tracking, and responsive user interface for seamless bookings.",
+          technologies: ["React", "Spring Boot", "JPA", "PostgreSQL", "WebSocket"],
           github : "https://github.com/halilkocoglu/Full-Stack-RentACar"
         },
         {
-          title: "University Website",
-          description: "Educational institution website with course listings, student and teacher profiles, and event management.",
-          technologies: ["Node.js", "Mongoose", "Express", "EJS", "Bcrypt", "HTML5", "CSS3", "JavaScript", "MongoDB"],
+          title: "Educational Institution & University Website",
+          description: "SEO-friendly educational portal featuring student management, course catalogs, and dynamic event systems using Node.js and MongoDB.",
+          technologies: ["Node.js", "Express", "MongoDB", "EJS", "HTML5/CSS3"],
           image: "/Smart-edu.png",
           github : "https://github.com/halilkocoglu/smart-edu-project"
         },
@@ -43,26 +43,26 @@ const Projects = ({ language }) => {
     },
     tr: {
       title: "Projeler",
-      subtitle: "Son çalışmalarımdan bazıları",
-      viewLive: "Detayları Görüntüle",
-      viewCode: "Kodu Görüntüle",
+      subtitle: "Özel Yazılım Çözümleri ve Web Uygulamaları",
+      viewLive: "Proje Detayları",
+      viewCode: "Kaynak Kodu",
       projects: [
         {
-          title: "ATM Tel örgü İş Yönetim Sistemi",
-          description: "Sipariş, envanter ve müşteri yönetimi özelliklerine sahip kapsamlı bir iş yönetim platformu.",
-          technologies: ["React", "Java", "PostgreSQL", "Hosting", "Docker", "JWT", "WebSocket", "REST API", "CI/CD", "Cloud Deployment"],
+          title: "ATM Tel Örgü İş Yönetim Sistemi (CMS)",
+          description: "Kurumsal düzeyde CMS ve envanter yönetim platformu. Java ve React ile geliştirilmiş, sipariş takibi ve güvenli müşteri veri yönetimi çözümü.",
+          technologies: ["React", "Java Spring Boot", "PostgreSQL", "Docker", "REST API", "Bulut"],
           image: "/ATM-logo.png"
         },
         {
-          title: "Araç Kiralama Web Uygulaması",
-          description: "Entegre rezervasyon, filo takibi ve müşteri yönetim sistemlerine sahip uçtan uca araç kiralama çözümü.",
-          technologies: ["React", "Java", "PostgreSQL", "WebSocket", "REST API", "JWT", "Spring Boot", "JPA", "Bootstrap", "i18next", "Git", "Github"],
+          title: "Uçtan Uca Araç Kiralama Uygulaması",
+          description: "Entegre rezervasyon sistemi, filo takibi ve kullanıcı dostu arayüze sahip kapsamlı bir araç kiralama web yazılımı çözümü.",
+          technologies: ["React", "Spring Boot", "JPA", "PostgreSQL", "WebSocket"],
           github : "https://github.com/halilkocoglu/Full-Stack-RentACar"
         },
         {
-          title: "Üniversite Web Sitesi",
-          description: "Kurs listeleri, öğrenci ve öğretmen profilleri ile etkinlik yönetimine sahip eğitim kurumu web sitesi.",
-          technologies: ["Node.js", "Mongoose", "Express", "EJS", "Bcrypt", "HTML5", "CSS3", "JavaScript", "MongoDB"],
+          title: "Üniversite ve Eğitim Kurumu Web Sitesi",
+          description: "Öğrenci yönetimi, kurs katalogları ve dinamik etkinlik sistemleri içeren, SEO uyumlu eğitim portalı yazılımı.",
+          technologies: ["Node.js", "Express", "MongoDB", "EJS", "HTML5/CSS3"],
           image: "/Smart-edu.png",
           github : "https://github.com/halilkocoglu/smart-edu-project"
         },
@@ -115,7 +115,10 @@ const Projects = ({ language }) => {
               className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 group"
             >
               <div className="relative h-48 overflow-hidden">
-                <img alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src={project.image? project.image:"/ProjectPlaceholderImage.jpeg"} />
+                <img 
+                alt={`${project.title} - ${language === 'tr' ? 'Yazılım Projesi Görseli' : 'Software Project Preview'}`}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
+                src={project.image? project.image:"/ProjectPlaceholderImage.jpeg"} />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
               </div>
