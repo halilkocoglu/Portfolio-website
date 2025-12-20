@@ -6,55 +6,55 @@ const About = ({ language }) => {
   const translations = {
     en: {
       title: "About Me",
-      subtitle: "Passionate about creating digital experiences",
-      description: "I'm a dedicated full-stack web developer with a passion for creating elegant solutions to complex problems. With years of experience in modern web technologies, I specialize in building responsive, user-friendly applications that make a difference.",
+      subtitle: "Professional Software Solutions & Web Design", 
+      description: "I'm a dedicated Full-Stack Web Developer specialized in Java Spring Boot and React. Beyond writing code, I provide end-to-end digital solutions, from custom corporate website development to scalable backend systems. My goal is to transform complex business requirements into high-performance, SEO-friendly digital experiences.",
       highlights: [
         {
           icon: Code2,
-          title: "Clean Code",
-          description: "Writing maintainable and scalable code"
+          title: "Custom Development", 
+          description: "Tailor-made software for your business needs"
         },
         {
           icon: Palette,
-          title: "Creative Design",
-          description: "Crafting beautiful user interfaces"
+          title: "Modern UI/UX",
+          description: "Responsive and conversion-oriented designs"
         },
         {
           icon: Rocket,
-          title: "Performance",
-          description: "Optimizing for speed and efficiency"
+          title: "SEO Optimized", 
+          description: "Ensuring high visibility on search engines"
         },
         {
           icon: Users,
-          title: "Collaboration",
-          description: "Working effectively in teams"
+          title: "Client-Focused", 
+          description: "Dedicated support and effective communication"
         }
       ]
     },
     tr: {
       title: "Hakkımda",
-      subtitle: "Dijital deneyimler yaratma tutkusu",
-      description: "Karmaşık problemlere zarif çözümler üretme tutkusuyla çalışan full stack web geliştiricisiyim. Modern web teknolojilerinde yıllarca deneyimle, fark yaratan duyarlı ve kullanıcı dostu uygulamalar geliştirme konusunda uzmanım.",
+      subtitle: "Profesyonel Yazılım Çözümleri ve Web Tasarım",
+      description: "Java Spring Boot ve React teknolojilerinde uzmanlaşmış bir Full-Stack Web Geliştiricisiyim. Sadece kod yazmakla kalmıyor, kurumsal web sitesi yapımından ölçeklenebilir backend sistemlerine kadar uçtan uca dijital çözümler sunuyorum. Amacım, karmaşık iş gereksinimlerinizi yüksek performanslı ve SEO uyumlu dijital deneyimlere dönüştürmektir.",
       highlights: [
         {
           icon: Code2,
-          title: "Temiz Kod",
-          description: "Sürdürülebilir ve ölçeklenebilir kod yazımı"
+          title: "Özel Yazılım",
+          description: "İş ihtiyaçlarınıza yönelik butik çözümler"
         },
         {
           icon: Palette,
-          title: "Yaratıcı Tasarım",
-          description: "Güzel kullanıcı arayüzleri tasarlama"
+          title: "Modern Tasarım",
+          description: "Duyarlı ve kullanıcı odaklı arayüzler"
         },
         {
           icon: Rocket,
-          title: "Performans",
-          description: "Hız ve verimlilik optimizasyonu"
+          title: "SEO Uyumluluk",
+          description: "Arama motorlarında görünürlük artışı"
         },
         {
           icon: Users,
-          title: "İşbirliği",
-          description: "Takımlarda etkili çalışma"
+          title: "Müşteri Odaklı",
+          description: "Kesintisiz destek ve şeffaf iletişim"
         }
       ]
     }
@@ -88,7 +88,7 @@ const About = ({ language }) => {
           >
             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 opacity-20"></div>
-              <img alt="Developer workspace with multiple monitors" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1484093609847-d2cc4eaea2cc" />
+              <img alt={language === 'tr' ? "Modern web yazılım geliştirme ortamı" : "Modern software development workspace"} className="w-full h-full object-cover" src="/codingmonitors.jpeg" />
             </div>
           </motion.div>
 
