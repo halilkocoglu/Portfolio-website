@@ -1,96 +1,77 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
 import { toast } from './ui/use-toast';
+import GithubIcon  from '../assets/GithubIcon';
 
 const Projects = ({ language }) => {
   const translations = {
     en: {
       title: "Projects",
       subtitle: "Some of my recent work",
-      viewLive: "View Live",
+      viewLive: "View Details",
       viewCode: "View Code",
       projects: [
         {
           title: "ATM Wire Business Management System",
           description: "Comprehensive business management platform with order, inventory, and customer management features.",
           technologies: ["React", "Java", "PostgreSQL", "Hosting", "Docker", "JWT", "WebSocket", "REST API", "CI/CD", "Cloud Deployment"],
-          image: "ATM wire business management system interface"
+          image: "/ATM-logo.png"
         },
         {
           title: "Car Rental Web Application",
           description: "Integrated reservation, fleet tracking, and customer management system for end-to-end car rental solution.",
           technologies: ["React", "Java", "PostgreSQL", "WebSocket", "REST API", "JWT", "Spring Boot", "JPA", "Bootstrap", "i18next", "Git", "Github"],
-          image: "Car rental web application interface"
+          github : "https://github.com/halilkocoglu/Full-Stack-RentACar"
         },
         {
-          title: "Social Media Dashboard",
-          description: "Analytics dashboard for social media management with data visualization.",
-          technologies: ["Vue.js", "Chart.js", "Express", "PostgreSQL"],
-          image: "Social media analytics dashboard with graphs and statistics"
+          title: "University Website",
+          description: "Educational institution website with course listings, student and teacher profiles, and event management.",
+          technologies: ["Node.js", "Mongoose", "Express", "EJS", "Bcrypt", "HTML5", "CSS3", "JavaScript", "MongoDB"],
+          image: "/Smart-edu.png",
+          github : "https://github.com/halilkocoglu/smart-edu-project"
         },
         {
-          title: "Portfolio CMS",
-          description: "Content management system for creating and managing portfolio websites.",
-          technologies: ["React", "Next.js", "Prisma", "AWS"],
-          image: "Content management system interface for portfolio creation"
-        },
-        {
-          title: "Weather Application",
-          description: "Real-time weather app with forecasts and location-based features.",
-          technologies: ["React", "OpenWeather API", "Geolocation"],
-          image: "Weather application showing forecast and current conditions"
-        },
-        {
-          title: "Fitness Tracker",
-          description: "Mobile-responsive fitness tracking app with workout logs and progress charts.",
-          technologies: ["React Native", "Redux", "Node.js", "MySQL"],
-          image: "Fitness tracking app with workout logs and progress graphs"
+          title: "Portfolio Website",
+          description: "Personal single page portfolio website.",
+          technologies: ["React", "Radix UI", "Framer Motion", "Lucide React", "Tailwind CSS", "Netlify"],
+          image: "/portfolio.png",
+          github : "https://github.com/halilkocoglu/Portfolio-website"
         }
       ]
     },
     tr: {
       title: "Projeler",
       subtitle: "Son çalışmalarımdan bazıları",
-      viewLive: "Canlı Görüntüle",
+      viewLive: "Detayları Görüntüle",
       viewCode: "Kodu Görüntüle",
       projects: [
         {
           title: "ATM Tel örgü İş Yönetim Sistemi",
           description: "Sipariş, envanter ve müşteri yönetimi özelliklerine sahip kapsamlı bir iş yönetim platformu.",
           technologies: ["React", "Java", "PostgreSQL", "Hosting", "Docker", "JWT", "WebSocket", "REST API", "CI/CD", "Cloud Deployment"],
-          image: "ATM tel örgü iş yönetim sistemi arayüzü"
+          image: "/ATM-logo.png"
         },
         {
           title: "Araç Kiralama Web Uygulaması",
           description: "Entegre rezervasyon, filo takibi ve müşteri yönetim sistemlerine sahip uçtan uca araç kiralama çözümü.",
           technologies: ["React", "Java", "PostgreSQL", "WebSocket", "REST API", "JWT", "Spring Boot", "JPA", "Bootstrap", "i18next", "Git", "Github"],
-          image: "Araç kiralama web uygulaması arayüzü"
+          github : "https://github.com/halilkocoglu/Full-Stack-RentACar"
         },
         {
-          title: "Sosyal Medya Panosu",
-          description: "Veri görselleştirme ile sosyal medya yönetimi için analitik panosu.",
-          technologies: ["Vue.js", "Chart.js", "Express", "PostgreSQL"],
-          image: "Grafikler ve istatistiklerle sosyal medya analitik panosu"
+          title: "Üniversite Web Sitesi",
+          description: "Kurs listeleri, öğrenci ve öğretmen profilleri ile etkinlik yönetimine sahip eğitim kurumu web sitesi.",
+          technologies: ["Node.js", "Mongoose", "Express", "EJS", "Bcrypt", "HTML5", "CSS3", "JavaScript", "MongoDB"],
+          image: "/Smart-edu.png",
+          github : "https://github.com/halilkocoglu/smart-edu-project"
         },
         {
-          title: "Portföy CMS",
-          description: "Portföy web siteleri oluşturmak ve yönetmek için içerik yönetim sistemi.",
-          technologies: ["React", "Next.js", "Prisma", "AWS"],
-          image: "Portföy oluşturma için içerik yönetim sistemi arayüzü"
-        },
-        {
-          title: "Hava Durumu Uygulaması",
-          description: "Tahminler ve konum tabanlı özelliklerle gerçek zamanlı hava durumu uygulaması.",
-          technologies: ["React", "OpenWeather API", "Geolocation"],
-          image: "Tahmin ve mevcut koşulları gösteren hava durumu uygulaması"
-        },
-        {
-          title: "Fitness Takipçisi",
-          description: "Antrenman kayıtları ve ilerleme grafikleri ile mobil duyarlı fitness takip uygulaması.",
-          technologies: ["React Native", "Redux", "Node.js", "MySQL"],
-          image: "Antrenman kayıtları ve ilerleme grafikleri ile fitness takip uygulaması"
+          title: "Portföy Web Sitesi",
+          description: "Kişisel tek sayfa portföy web sitesi.",
+          technologies: ["React", "Radix UI", "Framer Motion", "Lucide React", "Tailwind CSS", "Netlify"],
+          image: "/portfolio.png",
+          github : "https://github.com/halilkocoglu/Portfolio-website"
         }
       ]
     }
@@ -101,7 +82,7 @@ const Projects = ({ language }) => {
   const handleProjectClick = (type) => {
     toast({
       title: "🚧 Project Link",
-      description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
+      description: "🚧 This feature isn't implemented yet—but don't worry! 🚀"
     });
   };
 
@@ -134,14 +115,14 @@ const Projects = ({ language }) => {
               className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 group"
             >
               <div className="relative h-48 overflow-hidden">
-                <img alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="https://images.unsplash.com/photo-1572177812156-58036aae439c" />
+                <img alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src={project.image? project.image:"/ProjectPlaceholderImage.jpeg"} />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
               </div>
 
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-gray-400 mb-4 line-clamp-2">{project.description}</p>
+                <p className="text-gray-400 mb-4 line-clamp-3">{project.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, techIndex) => (
@@ -155,22 +136,25 @@ const Projects = ({ language }) => {
                 </div>
 
                 <div className="flex gap-3">
+                  {project.github && 
+                  <motion.a
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  href={project.github}
+                  className="flex-0"
+                  target='_blank'
+                  rel="noopener noreferrer"
+                  >
                   <Button
-                    onClick={() => handleProjectClick('live')}
                     size="sm"
                     className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     {t.viewLive}
                   </Button>
-                  <Button
-                    onClick={() => handleProjectClick('code')}
-                    size="sm"
-                    variant="outline"
-                    className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
-                  >
-                    <Github className="w-4 h-4" />
-                  </Button>
+                  </motion.a>}
+
                 </div>
               </div>
             </motion.div>
