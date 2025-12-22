@@ -2,8 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
-import { toast } from './ui/use-toast';
-import GithubIcon  from '../assets/GithubIcon';
 
 const Projects = ({ language }) => {
   const translations = {
@@ -17,7 +15,7 @@ const Projects = ({ language }) => {
           title: "ATM Wire Business Management System (CMS)",
           description: "An enterprise-level CMS and inventory management platform. Includes automated order tracking and secure customer data management built with Java and React.",
           technologies: ["React", "Java Spring Boot", "PostgreSQL", "Docker", "REST API", "Cloud"],
-          image: "/ATM-logo.png"
+          image: "/ATM-logo.webp"
         },
         {
           title: "Full-Stack Car Rental Application",
@@ -29,14 +27,14 @@ const Projects = ({ language }) => {
           title: "Educational Institution & University Website",
           description: "SEO-friendly educational portal featuring student management, course catalogs, and dynamic event systems using Node.js and MongoDB.",
           technologies: ["Node.js", "Express", "MongoDB", "EJS", "HTML5/CSS3"],
-          image: "/Smart-edu.png",
+          image: "/smart-edu.webp",
           github : "https://github.com/halilkocoglu/smart-edu-project"
         },
         {
           title: "Portfolio Website",
           description: "Personal single page portfolio website.",
           technologies: ["React", "Radix UI", "Framer Motion", "Lucide React", "Tailwind CSS", "Netlify"],
-          image: "/portfolio.png",
+          image: "/portfolio.webp",
           github : "https://github.com/halilkocoglu/Portfolio-website"
         }
       ]
@@ -51,7 +49,7 @@ const Projects = ({ language }) => {
           title: "ATM Tel Örgü İş Yönetim Sistemi (CMS)",
           description: "Kurumsal düzeyde CMS ve envanter yönetim platformu. Java ve React ile geliştirilmiş, sipariş takibi ve güvenli müşteri veri yönetimi çözümü.",
           technologies: ["React", "Java Spring Boot", "PostgreSQL", "Docker", "REST API", "Bulut"],
-          image: "/ATM-logo.png"
+          image: "/ATM-logo.webp"
         },
         {
           title: "Uçtan Uca Araç Kiralama Uygulaması",
@@ -63,14 +61,14 @@ const Projects = ({ language }) => {
           title: "Üniversite ve Eğitim Kurumu Web Sitesi",
           description: "Öğrenci yönetimi, kurs katalogları ve dinamik etkinlik sistemleri içeren, SEO uyumlu eğitim portalı yazılımı.",
           technologies: ["Node.js", "Express", "MongoDB", "EJS", "HTML5/CSS3"],
-          image: "/Smart-edu.png",
+          image: "/smart-edu.webp",
           github : "https://github.com/halilkocoglu/smart-edu-project"
         },
         {
           title: "Portföy Web Sitesi",
           description: "Kişisel tek sayfa portföy web sitesi.",
           technologies: ["React", "Radix UI", "Framer Motion", "Lucide React", "Tailwind CSS", "Netlify"],
-          image: "/portfolio.png",
+          image: "/portfolio.webp",
           github : "https://github.com/halilkocoglu/Portfolio-website"
         }
       ]
@@ -79,12 +77,6 @@ const Projects = ({ language }) => {
 
   const t = translations[language];
 
-  const handleProjectClick = (type) => {
-    toast({
-      title: "🚧 Project Link",
-      description: "🚧 This feature isn't implemented yet—but don't worry! 🚀"
-    });
-  };
 
   return (
     <section id="projects" className="py-20 px-4 ">
@@ -118,7 +110,7 @@ const Projects = ({ language }) => {
                 <img 
                 alt={`${project.title} - ${language === 'tr' ? 'Yazılım Projesi Görseli' : 'Software Project Preview'}`}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
-                src={project.image? project.image:"/ProjectPlaceholderImage.jpeg"} />
+                src={project.image? project.image:"/projectplaceholderimage.webp"} />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
               </div>

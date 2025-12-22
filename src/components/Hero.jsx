@@ -146,7 +146,7 @@ const Hero = ({ language }) => {
                 <img 
                 alt={`Halil İbrahim Koçoğlu -${language === 'tr' ? 'Web Sitesi Yapımı ve Yazılım Çözümleri' : ' Full Stack Web Developer & Software Solutions'} `} 
                 className="w-full h-full object-cover" 
-                src="/ProfilePicture.jpeg" />
+                src="/profilepicture.webp" />
               </div>
             </div>
           </motion.div>

@@ -114,7 +114,7 @@ const Skills = ({ language }) => {
                 <h3 className="text-xl font-bold text-white">{category.title}</h3>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <motion.ul className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.li
                     key={skillIndex}
@@ -127,7 +127,7 @@ const Skills = ({ language }) => {
                     {skill}
                   </motion.li>
                 ))}
-              </div>
+              </motion.ul>
             </motion.div>
           ))}
         </div>

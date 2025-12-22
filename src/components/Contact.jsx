@@ -122,7 +122,7 @@ const Contact = ({ language }) => {
               viewport={{ once: true }}
               className="relative h-64 rounded-2xl overflow-hidden"
             >
-              <img alt="Contact us illustration" className="w-full h-full object-cover" src="/contact.jpeg" />
+              <img alt="Contact us illustration" className="w-full h-full object-cover" src="/contact.webp" />
             </motion.div>
           
         </div>

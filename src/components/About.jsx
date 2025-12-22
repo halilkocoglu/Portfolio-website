@@ -88,7 +88,7 @@ const About = ({ language }) => {
           >
             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 opacity-20"></div>
-              <img alt={language === 'tr' ? "Modern web yazılım geliştirme ortamı" : "Modern software development workspace"} className="w-full h-full object-cover" src="/codingmonitors.jpeg" />
+              <img alt={language === 'tr' ? "Modern web yazılım geliştirme ortamı" : "Modern software development workspace"} className="w-full h-full object-cover" src="/codingmonitors.webp" />
             </div>
           </motion.div>
 
