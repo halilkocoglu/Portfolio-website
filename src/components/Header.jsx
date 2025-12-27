@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { animate, motion } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -35,12 +35,23 @@ const Header = ({ language, setLanguage }) => {
   }, []);
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
-  };
+  const element = document.getElementById(id);
+  if (element) {
+    const headerOffset = 80;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    // Tarayıcıya güvenmek yerine Framer Motion motorunu kullanıyoruz
+    animate(window.scrollY, offsetPosition, {
+      type: "tween",
+      ease: "easeInOut",
+      duration: 0.8, // Hızı buradan milisaniye cinsinden ayarlayabilirsin
+      onUpdate: (latest) => window.scrollTo(0, latest),
+    });
+
+    setIsMobileMenuOpen(false);
+  }
+};
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'tr' : 'en');
@@ -67,7 +78,7 @@ const Header = ({ language, setLanguage }) => {
             Portfolio
           </motion.div>
 
-          {/* Desktop Navigation (Değişmedi) */}
+          {/* Desktop Navigation  */}
           <div className="hidden md:flex items-center gap-8">
             {['about', 'experience', 'projects', 'skills', 'contact'].map((section) => (
               <button
