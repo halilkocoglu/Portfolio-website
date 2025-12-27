@@ -104,29 +104,27 @@ const Header = ({ language, setLanguage }) => {
           </div>
 
           {/* ****************************************************** */}
-          {/* Mobil Menü Butonu BLOĞU (Düzeltilen Kısım) */}
+          {/* Mobil Menü Butonu BLOĞU */}
           {/* ****************************************************** */}
           <div className="md:hidden flex items-center gap-4">
             
-            {/* Dil Değiştirme Düğmesi Stili - Görseldeki gibi sade ve çerçeveli olmalı */}
-            {/* Beyaz ikon ve TR metni için text-white kullandık. */}
             <div
               onClick={toggleLanguage}
               className="flex items-center justify-center p-2 cursor-pointer 
                          border border-solid border-white/80 rounded 
                          text-white text-base font-semibold transition-all duration-200
-                         h-9" // Yüksekliği sabit tutarak hizalama sorununu çözdük
+                         h-9"
             >
               <Globe className="w-5 h-5" /> 
               <span className="ml-1.5">{language === 'en' ? 'TR' : 'EN'}</span>
             </div>
             
-            {/* Mobil Menü Açma/Kapama - Görseldeki gibi sade, arka planı gri/beyaz */}
+            {/* Mobil Menü Açma/Kapama - sade, arka planı gri/beyaz */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-slate-800 bg-white p-2 rounded 
                          flex items-center justify-center 
-                         h-9 w-9" // Dil düğmesiyle aynı yüksekliği verdik
+                         h-9 w-9" 
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>

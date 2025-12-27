@@ -37,7 +37,7 @@ const Hero = ({ language }) => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4 pt-20">
+    <section id="hero" className="min-h-screen flex items-center justify-center md:px-4 pt-20">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div

@@ -79,7 +79,7 @@ const Projects = ({ language }) => {
 
 
   return (
-    <section id="projects" className="py-20 px-4 ">
+    <section id="projects" className="py-10 md:py-20 md:px-4 ">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
