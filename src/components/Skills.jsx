@@ -16,17 +16,17 @@ const Skills = ({ language }) => {
         {
           icon: Server,
           title: "Backend & API Architecture",
-          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices", "CI/CD", "Containerization (Docker)", "Version Control (Git)","DevOps Practices", "Database Design", "Database Optimization"]
-        },
-        {
-          icon: Database,
-          title: "Database",
-          skills: ["MongoDB", "PostgreSQL", "MySQL"]
+          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices"]
         },
         {
           icon: Tool,
           title: "Cloud & DevOps Solutions",
-          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services"]
+          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services", "Containerization (Docker)","Version Control (Git)","DevOps Practices",]
+        },
+        {
+          icon: Database,
+          title: "Database",
+          skills: ["MongoDB", "PostgreSQL", "MySQL",  "Database Design", "Database Optimization"]
         },
         // {
         //   icon: Smartphone,
@@ -52,17 +52,17 @@ const Skills = ({ language }) => {
         {
           icon: Server,
           title: "Backend & API Mimarisi",
-          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices", "CI/CD", "Containerization (Docker)", "Version Control (Git)","DevOps Practices", "Database Design", "Database Optimization"]
-        },
-        {
-          icon: Database,
-          title: "Veritabanı",
-          skills: ["MongoDB", "PostgreSQL", "MySQL"]
+          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices"]
         },
         {
           icon: Tool,
           title: "DevOps & Bulut Çözümleri",
-          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services"]
+          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services", "Containerization (Docker)","Version Control (Git)","DevOps Practices",]
+        },
+        {
+          icon: Database,
+          title: "Veritabanı",
+          skills: ["MongoDB", "PostgreSQL", "MySQL",  "Database Design", "Database Optimization"]
         },
         // {
         //   icon: Smartphone,
