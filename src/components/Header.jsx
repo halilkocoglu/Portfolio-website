@@ -121,6 +121,7 @@ const Header = ({ language, setLanguage }) => {
             
             {/* Mobil Menü Açma/Kapama - sade, arka planı gri/beyaz */}
             <button
+              aria-label="hamburger-menu"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-slate-800 bg-white p-2 rounded 
                          flex items-center justify-center 
