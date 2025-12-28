@@ -10,4 +10,4 @@ Disallow: /assets/
 # Disallow: /admin/
 
 # Site haritası
-Sitemap: https://www.halilibrahimkocoglu.com/sitemap.xml
+Sitemap: https://www.halilibrahimkocoglu.com.tr/sitemap.xml
