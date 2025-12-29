@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, Phone, MapPin } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Copy } from 'lucide-react';
 import { toast } from './ui/use-toast';
 
 const Contact = ({ language }) => {
@@ -8,61 +8,66 @@ const Contact = ({ language }) => {
 
   const translations = {
     en: {
-      title: "Contact For Web Solutions", 
-      subtitle: "Professional Web Design & Software Development Services",
+      title: "Get in Touch", 
+      subtitle: "Web Design & Software Solutions in Aydın & Nazilli",
       contactInfo: [
         {
           icon: Mail,
           label: "Email",
-          value: "halilkocoglu98@gmail.com"
+          value: "halilkocoglu98@gmail.com",
+          copyable: true
         },
         {
           icon: Phone,
-          label: "Direct Phone",
-          value: "+90 533 947 52 17"
+          label: "Phone",
+          value: "+90 533 947 52 17",
+          copyable: true
         },
         {
           icon: MapPin,
-          label: "Service Area",
-          value: "Aydın, Turkey (Remote & On-site)"
+          label: "Location",
+          value: "Nazilli / Aydın, Turkey",
+          copyable: false
         }
       ]
     },
     tr: {
-      title: "Yazılım Çözümleri İçin İletişim",
-      subtitle: "Profesyonel Web Tasarım ve Yazılım Geliştirme Hizmetleri",
+      title: "İletişime Geçin",
+      subtitle: "Nazilli ve Aydın Bölgesinde Web Tasarım & Yazılım Çözümleri",
       contactInfo: [
         {
           icon: Mail,
           label: "E-posta",
-          value: "halilkocoglu98@gmail.com"
+          value: "halilkocoglu98@gmail.com",
+          copyable: true
         },
         {
           icon: Phone,
           label: "Telefon",
-          value: "+90 533 947 52 17"
+          value: "+90 533 947 52 17",
+          copyable: true
         },
         {
           icon: MapPin,
-          label: "Hizmet Bölgesi",
-          value: "Aydın, Türkiye (Uzaktan & Yerinde)"
+          label: "Konum",
+          value: "Nazilli / Aydın, Türkiye",
+          copyable: false
         }
       ]
     }
   };
-
   const t = translations[language];
 
 
-  const handleCopy = (value, label) => {
-    if(label !== "Service Area" && label !== "Hizmet Bölgesi") {
+ const handleCopy = (value, isCopyable) => {
+    if (isCopyable) {
       navigator.clipboard.writeText(value);
       toast({
-        title: language === 'tr' ? "🚧 Kopyalandı! 🚧" : "🚧 Copied! 🚧",
-        description: language === 'tr' ? `🚀 "${value}" panoya kopyalandı. 🚀` : `🚀 "${value}" copied to clipboard.🚀`
+        title: language === 'tr' ? "Başarıyla Kopyalandı" : "Copied Successfully",
+        description: value,
       });
     }
-};
+  };
 
   return (
     <section id="contact" className="py-10 md:py-20 md:px-4">
@@ -92,7 +97,7 @@ const Contact = ({ language }) => {
               {t.contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
-                  onClick={() => handleCopy(info.value, info.label)}
+                  onClick={() => handleCopy(info.value, info.copyable)}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -100,7 +105,11 @@ const Contact = ({ language }) => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   // overflow-hidden ve w-full eklendi
-                  className="flex items-center gap-4 bg-gradient-to-br from-slate-800 to-slate-900 p-4 md:p-6 rounded-xl border border-purple-500/20 hover:border-purple-500/50 transition-all cursor-pointer w-full overflow-hidden"
+                  className={`flex items-center gap-5 px-2 py-5 rounded-2xl border transition-all duration-300 shadow-xl ${
+                  info.copyable 
+                    ? 'bg-slate-900/40 border-white/5 hover:border-purple-500/50 cursor-pointer group' 
+                    : 'bg-slate-950/20 border-white/5 cursor-default'
+                }`}
                 >
                   {/* İkon Kutusu: Boyutu mobilde biraz küçülttük */}
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0">
@@ -113,12 +122,12 @@ const Contact = ({ language }) => {
                     <p className="text-white font-semibold text-sm md:text-base break-words md:break-normal leading-tight">
                       {info.value}
                     </p>
-                    {(info.label !== "Service Area" && info.label !== "Hizmet Bölgesi") && (
-                      <p className="text-purple-400/60 text-[10px] md:text-xs mt-1">
-                        {language === 'tr' ? 'Kopyalamak için tıklayın' : 'Click to copy'}
-                      </p>
-                    )}
                   </div>
+                  {info.copyable && (
+                    <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                      <Copy size={18} className="text-purple-400" />
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
