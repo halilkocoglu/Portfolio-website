@@ -1,8 +1,31 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import { Briefcase, Calendar } from 'lucide-react';
 
+// Performans dostu Intersection Observer Hook'u
+const useInView = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, isVisible];
+};
+
 const Experience = ({ language }) => {
+  const [titleRef, titleInView] = useInView();
+  
   const translations = {
     en: {
       title: "Experience",
@@ -49,68 +72,74 @@ const Experience = ({ language }) => {
   const t = translations[language];
 
   return (
-    <section id="experience" className="py-10 md:py-20 md:px-4 bg-slate-900/50">
+    <section id="experience" className="py-16 md:py-24 px-4 bg-slate-900/50 overflow-hidden">
       <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+        {/* Başlık Bölümü */}
+        <div
+          ref={titleRef}
+          className={`text-center mb-16 transition-all duration-1000 transform ${
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
             {t.title}
           </h2>
-          <p className="text-gray-400 text-lg">{t.subtitle}</p>
-        </motion.div>
+          <p className="text-gray-200 text-lg">{t.subtitle}</p>
+        </div>
 
-        <div className="max-w-4xl mx-auto space-y-8">
-          {t.experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 relative overflow-hidden group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              <div className="relative z-10">
-                <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0">
-                      <Briefcase className="w-6 h-6 text-white" />
+        {/* Deneyim Listesi */}
+        <div className="max-w-4xl mx-auto space-y-10">
+          {t.experiences.map((exp, index) => {
+            // Her kart için ayrı bir observer kullanıyoruz
+            const [itemRef, itemInView] = useInView();
+
+            return (
+              <div
+                key={index}
+                ref={itemRef}
+                style={{ transitionDelay: `${index * 150}ms` }}
+                className={`group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-purple-500/20 transition-all duration-700 transform ${
+                  itemInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                } hover:border-purple-500/50 hover:scale-[1.01] hover:shadow-2xl hover:shadow-purple-500/10`}
+              >
+                {/* Arka Plan Efekti (GPU Hızlandırmalı) */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/20">
+                        <Briefcase className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">{exp.position}</h3>
+                        <p className="text-purple-400 font-medium">{exp.company}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">{exp.position}</h3>
-                      <p className="text-purple-400 font-semibold">{exp.company}</p>
+                    <div className="flex items-center gap-2 text-gray-200 bg-slate-800/50 px-3 py-1.5 rounded-lg self-start md:self-auto">
+                      <Calendar className="w-4 h-4 text-pink-500" />
+                      <time className="text-sm font-medium tracking-wide">{exp.period}</time>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-400">
-                    <Calendar className="w-4 h-4" />
-                    <time className="text-sm">{exp.period}</time>
+
+                  <p className="text-gray-100 mb-6 leading-relaxed text-base md:text-lg">
+                    {exp.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 bg-slate-800 text-purple-300 rounded-lg text-xs md:text-sm border border-white/5 group-hover:border-purple-500/30 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
-                </div>
-
-                <p className="text-gray-300 mb-4 leading-relaxed">
-                  {exp.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30"
-                    >
-                      {tech}
-                    </span>
-                  ))}
                 </div>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
-const TOAST_LIMIT = 1
+const TOAST_LIMIT = 3 // Limit 1 çok kısıtlayıcı olabilir, 3 idealdir.
+const TOAST_REMOVE_DELAY = 5000
 
 let count = 0
 function generateId() {
@@ -8,40 +9,36 @@ function generateId() {
   return count.toString()
 }
 
+// Global Store: Bileşenler dışında veriyi tutar
 const toastStore = {
-  state: {
-    toasts: [],
-  },
-  listeners: [],
+  state: { toasts: [] },
+  listeners: new Set(), // Array yerine Set kullanarak performans ve güvenlik artırıldı
   
   getState: () => toastStore.state,
   
   setState: (nextState) => {
-    if (typeof nextState === 'function') {
-      toastStore.state = nextState(toastStore.state)
-    } else {
-      toastStore.state = { ...toastStore.state, ...nextState }
-    }
+    toastStore.state = typeof nextState === 'function' 
+      ? nextState(toastStore.state) 
+      : { ...toastStore.state, ...nextState };
     
-    toastStore.listeners.forEach(listener => listener(toastStore.state))
+    toastStore.listeners.forEach(listener => listener(toastStore.state));
   },
   
   subscribe: (listener) => {
-    toastStore.listeners.push(listener)
-    return () => {
-      toastStore.listeners = toastStore.listeners.filter(l => l !== listener)
-    }
+    toastStore.listeners.add(listener);
+    return () => toastStore.listeners.delete(listener);
   }
 }
 
+// Bildirim tetikleyici fonksiyon
 export const toast = ({ ...props }) => {
   const id = generateId()
 
-  const update = (props) =>
+  const update = (newProps) =>
     toastStore.setState((state) => ({
       ...state,
       toasts: state.toasts.map((t) =>
-        t.id === id ? { ...t, ...props } : t
+        t.id === id ? { ...t, ...newProps } : t
       ),
     }))
 
@@ -53,51 +50,41 @@ export const toast = ({ ...props }) => {
   toastStore.setState((state) => ({
     ...state,
     toasts: [
-      { ...props, id, dismiss },
+      { ...props, id, dismiss, update }, // Update fonksiyonu da toast objesine eklendi
       ...state.toasts,
     ].slice(0, TOAST_LIMIT),
   }))
 
-  return {
-    id,
-    dismiss,
-    update,
-  }
+  return { id, dismiss, update }
 }
 
+// Hook: Bileşenlerin store'a bağlanmasını sağlar
 export function useToast() {
   const [state, setState] = useState(toastStore.getState())
   
   useEffect(() => {
-    const unsubscribe = toastStore.subscribe((state) => {
-      setState(state)
-    })
-    
-    return unsubscribe
+    return toastStore.subscribe(setState) // Tek satırda güvenli abonelik
   }, [])
   
+  // Otomatik silme mekanizması (Clean-up odaklı)
   useEffect(() => {
-    const timeouts = []
-
-    state.toasts.forEach((toast) => {
-      if (toast.duration === Infinity) {
-        return
-      }
-
-      const timeout = setTimeout(() => {
-        toast.dismiss()
-      }, toast.duration || 5000)
-
-      timeouts.push(timeout)
-    })
+    const timeouts = state.toasts.map((t) => {
+      if (t.duration === Infinity) return null;
+      
+      return setTimeout(() => {
+        t.dismiss();
+      }, t.duration || TOAST_REMOVE_DELAY);
+    });
 
     return () => {
-      timeouts.forEach((timeout) => clearTimeout(timeout))
-    }
-  }, [state.toasts])
+      timeouts.forEach((timeout) => timeout && clearTimeout(timeout));
+    };
+  }, [state.toasts]);
 
   return {
     toast,
     toasts: state.toasts,
+    // Yardımcı fonksiyonlar: Pratik kullanım için
+    dismissAll: () => toastStore.setState({ toasts: [] })
   }
 }

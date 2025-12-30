@@ -1,44 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Toaster } from './components/ui/toaster';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ErrorPage from './components/ErrorPage'; // Daha önce oluşturduğumuz bileşen
+
+// Ağır bileşenleri "Lazy Load" ile yüklüyoruz. 
+// Bu sayede başlangıç paket boyutu (bundle size) küçülür.
+const About = lazy(() => import('./components/About'));
+const Experience = lazy(() => import('./components/Experience'));
+const Projects = lazy(() => import('./components/Projects'));
+const Skills = lazy(() => import('./components/Skills'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+const ErrorPage = lazy(() => import('./components/ErrorPage'));
 
 function App() {
   const [language, setLanguage] = useState('tr');
   const [is404, setIs404] = useState(false);
 
   useEffect(() => {
-    // URL'deki path'i kontrol et (Örn: / veya /index.html dışında bir şey mi?)
+    // Basit route kontrolü
     const path = window.location.pathname;
-    if (path !== '/' && path !== '/index.html') {
+    const validPaths = ['/', '/index.html'];
+    if (!validPaths.includes(path)) {
       setIs404(true);
     }
   }, []);
 
-  // Eğer sayfa bulunamadıysa sadece ErrorPage döndür
+  // Yükleme sırasında görünecek basit bir "loading" alanı
+  const LoadingFallback = () => (
+    <div className="min-h-[200px] w-full flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
+
   if (is404) {
-    return <ErrorPage language={language} />;
+    return (
+      <Suspense fallback={<LoadingFallback />}>
+        <ErrorPage language={language} />
+      </Suspense>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-purple-500/30">
+      {/* Header ve Hero hemen yüklenmeli (LCP için kritik) */}
       <Header language={language} setLanguage={setLanguage} />
-      <main id='main-section'>
+      
+      <main id='main-section' className='flex flex-col min-h-screen'>
         <Hero language={language} />
-        <About language={language} />
-        <Experience language={language} />
-        <Projects language={language} />
-        <Skills language={language} />
-        <Contact language={language} />
+
+        {/* Diğer bölümler kullanıcı aşağı kaydırdıkça veya arka planda yüklenir */}
+        <Suspense fallback={<LoadingFallback />}>
+          <About language={language} />
+          <Experience language={language} />
+          <Projects language={language} />
+          <Skills language={language} />
+          <Contact language={language} />
+        </Suspense>
       </main>
-      <Footer language={language} />
+
+      <Suspense fallback={null}>
+        <Footer language={language} />
+      </Suspense>
+      
       <Toaster />
     </div>
   );

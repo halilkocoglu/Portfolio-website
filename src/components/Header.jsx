@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { animate, motion } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
-import { Button } from './ui/button';
 
 const Header = ({ language, setLanguage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,130 +28,112 @@ const Header = ({ language, setLanguage }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (id) => {
-  const element = document.getElementById(id);
-  if (element) {
-    const headerOffset = 80;
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-    // Tarayıcıya güvenmek yerine Framer Motion motorunu kullanıyoruz
-    animate(window.scrollY, offsetPosition, {
-      type: "tween",
-      ease: "easeInOut",
-      duration: 0.8, // Hızı buradan milisaniye cinsinden ayarlayabilirsin
-      onUpdate: (latest) => window.scrollTo(0, latest),
-    });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
 
-    setIsMobileMenuOpen(false);
-  }
-};
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'tr' : 'en');
   };
 
-  // Resimdeki görünüme uyacak şekilde stil güncellemeleri yapıldı
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-900/90 backdrop-blur-md shadow-lg' : 'bg-transparent' 
+    <header
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 transform ${
+        isScrolled 
+          ? 'bg-slate-900/90 backdrop-blur-md shadow-xl py-3' 
+          : 'bg-transparent py-5' 
       }`}
     >
-      <nav className="container mx-auto px-4 py-5">
+      <nav className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           
-          {/* Logo/Başlık */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-fuchsia-400 to-pink-500 bg-clip-text text-transparent cursor-pointer tracking-wider"
+          {/* Logo */}
+          <div
+            className="text-2xl font-bold bg-gradient-to-r from-fuchsia-400 to-pink-500 bg-clip-text text-transparent cursor-pointer tracking-wider hover:scale-105 transition-transform duration-300"
             onClick={() => scrollToSection('hero')}
           >
             Portfolio
-          </motion.div>
+          </div>
 
-          {/* Desktop Navigation  */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {['about', 'experience', 'projects', 'skills', 'contact'].map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className="text-gray-300 text-base font-medium hover:text-white transition-colors duration-300 relative group"
+                className="text-gray-100 text-sm lg:text-base font-medium hover:text-white transition-colors duration-300 relative group"
               >
                 {t[section]}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-fuchsia-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
             
-            <div
+            {/* Dil Seçici */}
+            <button
               onClick={toggleLanguage}
-              className="flex items-center p-1.5 cursor-pointer 
-                         border border-solid border-purple-600 
-                         rounded-md text-purple-400 text-sm font-semibold
-                         hover:bg-purple-900/30 transition-all duration-200"
+              className="flex items-center px-3 py-1.5 border border-purple-600/50 rounded-lg text-purple-400 text-sm font-semibold hover:bg-purple-900/20 transition-all duration-300 active:scale-95"
+            >
+              <Globe className="w-4 h-4 mr-2" /> 
+              {language === 'en' ? 'TR' : 'EN'}
+            </button>
+          </div>
+
+          {/* Mobil Menü Kontrolleri */}
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center justify-center h-10 px-3 border border-white/20 rounded-lg text-white text-sm font-semibold hover:bg-white/10 transition-colors"
             >
               <Globe className="w-4 h-4 mr-1.5" /> 
               {language === 'en' ? 'TR' : 'EN'}
-            </div>
-          </div>
-
-          {/* ****************************************************** */}
-          {/* Mobil Menü Butonu BLOĞU */}
-          {/* ****************************************************** */}
-          <div className="md:hidden flex items-center gap-4">
+            </button>
             
-            <div
-              onClick={toggleLanguage}
-              className="flex items-center justify-center p-2 cursor-pointer 
-                         border border-solid border-white/80 rounded 
-                         text-white text-base font-semibold transition-all duration-200
-                         h-9"
-            >
-              <Globe className="w-5 h-5" /> 
-              <span className="ml-1.5">{language === 'en' ? 'TR' : 'EN'}</span>
-            </div>
-            
-            {/* Mobil Menü Açma/Kapama - sade, arka planı gri/beyaz */}
             <button
-              aria-label="hamburger-menu"
+              aria-label="Menu"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-slate-800 bg-white p-2 rounded 
-                         flex items-center justify-center 
-                         h-9 w-9" 
+              className="flex items-center justify-center h-10 w-10 bg-white text-slate-900 rounded-lg shadow-lg active:scale-90 transition-transform"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
-          {/* ****************************************************** */}
-
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-4 bg-slate-800/95 backdrop-blur-md rounded-lg p-4 space-y-4"
-          >
+        {/* Mobil Menü Paneli */}
+        <div 
+          className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+            isMobileMenuOpen ? 'max-h-[400px] opacity-100 mt-4' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="bg-slate-800/95 backdrop-blur-xl rounded-2xl p-4 border border-white/5 shadow-2xl space-y-2">
             {['about', 'experience', 'projects', 'skills', 'contact'].map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 py-2"
+                className="block w-full text-left text-gray-100 hover:text-white hover:bg-white/5 transition-all duration-300 py-3 px-4 rounded-xl font-medium"
               >
                 {t[section]}
               </button>
             ))}
-          </motion.div>
-        )}
+          </div>
+        </div>
       </nav>
-    </motion.header>
+    </header>
   );
 };
 

@@ -1,8 +1,25 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import { Code2, Palette, Rocket, Users, MapPin } from 'lucide-react';
 
+const useInView = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setIsVisible(true),
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, isVisible];
+};
 const About = ({ language }) => {
+
+  const [headerRef, headerInView] = useInView();
+  const [contentRef, contentInView] = useInView();
   const translations = {
     en: {
       title: "About Me",
@@ -63,14 +80,14 @@ const About = ({ language }) => {
   const t = translations[language];
 
   return (
-    <section id="about" className="py-16 md:py-24 px-4 sm:px-6">
+    <section id="about" className="py-16 md:py-24 px-4 sm:px-6 overflow-hidden">
       <div className="container mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+        {/* Başlık Alanı */}
+        <div
+          ref={headerRef}
+          className={`text-center mb-16 transition-all duration-1000 transform ${
+            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
         >
           <h2 className="text-4xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 bg-clip-text text-transparent italic">
             {t.title}
@@ -78,64 +95,54 @@ const About = ({ language }) => {
           <p className="text-purple-400 font-mono text-sm md:text-lg tracking-widest uppercase">
             {t.subtitle}
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div ref={contentRef} className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Görsel Alanı */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative group"
-          >
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+          <div className={`relative group transition-all duration-1000 delay-200 transform ${
+            contentInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          }`}>
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-              <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
-                alt={language === 'tr' ? "Nazilli Aydın Web Tasarım Ofisi" : "Web Design Agency Aydın"} 
+                loading="lazy" // Performans için kritik: Lazy loading
+                alt={language === 'tr' ? "Nazilli Aydın Web Tasarım" : "Web Design Aydın"} 
                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
                 src="/codingmonitors.webp" 
               />
             </div>
-            
-            {/* Küçük bir yüzen bilgi kartı (Social Proof) */}
+            {/* Sosyal Proof Kartı */}
             <div className="absolute -bottom-6 -right-6 bg-slate-900 border border-purple-500/30 p-4 rounded-xl hidden md:block z-20 backdrop-blur-xl">
               <p className="text-white font-bold text-xl leading-none">3+</p>
-              <p className="text-gray-400 text-xs uppercase tracking-tighter">
+              <p className="text-gray-200 text-xs uppercase tracking-tighter">
                 {language === 'tr' ? 'Yıllık Deneyim' : 'Years Experience'}
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Metin Alanı */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-center"
-          >
-            <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-8">
+          {/* Metin ve Kartlar Alanı */}
+          <div className={`flex flex-col justify-center transition-all duration-1000 delay-400 transform ${
+            contentInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+          }`}>
+            <p className="text-gray-200 text-lg md:text-xl leading-relaxed mb-8">
               {t.description}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {t.highlights.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  whileHover={{ y: -5 }}
-                  className="bg-slate-900/50 backdrop-blur-sm p-5 rounded-2xl border border-white/5 hover:border-purple-500/40 transition-all shadow-lg"
+                  className="bg-slate-900/50 backdrop-blur-sm p-5 rounded-2xl border border-white/5 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-lg"
                 >
                   <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4 text-purple-400 border border-purple-500/20">
                     <item.icon size={22} />
                   </div>
                   <h3 className="text-white font-bold mb-1 tracking-tight">{item.title}</h3>
-                  <p className="text-gray-500 text-sm leading-snug">{item.description}</p>
-                </motion.div>
+                  <p className="text-gray-200 text-sm leading-snug">{item.description}</p>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,7 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Mail, Heart } from 'lucide-react';
-import { toast } from './ui/use-toast';
 import GithubIcon from '../assets/GithubIcon';
 import LinkedinIcon from '../assets/LinkedinIcon';
 
@@ -22,58 +20,45 @@ const Footer = ({ language }) => {
   const t = translations[language];
   const currentYear = new Date().getFullYear();
 
-
   return (
-    <footer className="bg-slate-900/80 backdrop-blur-md border-t border-purple-500/20 py-8 px-4">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center md:text-left"
-          >
-            <p className="text-gray-400">
-              © {currentYear} Portfolio. {t.rights}
+    <footer className="relative z-[100] w-full bg-footer border-t border-purple-500/20 py-10 px-4 mt-auto">
+      <div className="container mx-auto max-w-7xl">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          
+          {/* Sol Kısım: Telif Hakları */}
+          <div className="text-center md:text-left">
+            <p className="text-gray-200 text-sm md:text-base">
+              © {currentYear} <span className="text-purple-400 font-semibold">Portfolio</span>. {t.rights}
             </p>
-            {language === "en" ?
-            <p className="text-gray-500 text-sm mt-1 flex items-center justify-center md:justify-start gap-1">
-              {t.madeWith} <Heart className="w-4 h-4 text-pink-500 fill-pink-500" /> {t.by}
-            </p>
-            :
-            <p className="text-gray-500 text-sm mt-1 flex items-center justify-center md:justify-start gap-1">
-              {t.by} <Heart className="w-4 h-4 text-pink-500 fill-pink-500" /> {t.madeWith}
-            </p>
-            }
-          </motion.div>
+            <div className="text-gray-300 text-sm mt-2 flex items-center justify-center md:justify-start gap-1">
+              {language === "en" ? (
+                <p>{t.madeWith} <Heart className="inline w-4 h-4 text-pink-500 fill-pink-500 animate-pulse" /> {t.by}</p>
+              ) : (
+                <p>{t.by} <Heart className="inline w-4 h-4 text-pink-500 fill-pink-500 animate-pulse" /> {t.madeWith}</p>
+              )}
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="flex gap-4"
-          >
+          {/* Sağ Kısım: Sosyal Medya */}
+          <div className="flex items-center gap-5">
             {[
               { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/halilkocoglu' },
               { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/halilkocoglu/' },
               { icon: Mail, label: 'Email', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=halilkocoglu98@gmail.com' }
             ].map((social, index) => (
-              <motion.a
+              <a
                 key={index}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                className="group relative w-11 h-11 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-center text-white transition-all duration-300 hover:border-purple-500/50 hover:bg-purple-500/10 hover:-translate-y-1 shadow-lg"
                 aria-label={social.label}
               >
-                <social.icon size={18} />
-              </motion.a>
+                <social.icon size={20} className="transition-transform group-hover:scale-110" />
+                <div className="absolute inset-0 rounded-xl bg-purple-500/20 blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </a>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </footer>

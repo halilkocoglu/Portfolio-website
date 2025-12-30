@@ -1,8 +1,23 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code, Database, Layout, Server, Smartphone, Wrench as Tool } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Code, Database, Layout, Server, Wrench as Tool } from 'lucide-react';
+
+const useInView = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+  return [ref, isVisible];
+};
 
 const Skills = ({ language }) => {
+  const [headerRef, headerInView] = useInView();
+
   const translations = {
     en: {
       title: "Technical Expertise",
@@ -11,28 +26,23 @@ const Skills = ({ language }) => {
         {
           icon: Code,
           title: "Frontend Development",
-          skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "i18next", "Framer Motion", "Three.js", "Chakra UI", "Material-UI", "Vite", "ESLint", "Prettier", "Chart.js", "Responsive Design", "Performance Optimization", "SEO Best Practices"]
+          skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "Vite", "ESLint", "Three.js", "Chakra UI", "Material-UI", "Chart.js", "Performance Optimization", "SEO Best Practices"]
         },
         {
           icon: Server,
           title: "Backend & API Architecture",
-          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices"]
+          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs", "WebSocket", "JWT", "Scalability", "Security Best Practices"]
         },
         {
           icon: Tool,
           title: "Cloud & DevOps Solutions",
-          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services", "Containerization (Docker)","Version Control (Git)","DevOps Practices",]
+          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment", "Hosting Services", "DevOps Practices"]
         },
         {
           icon: Database,
           title: "Database",
-          skills: ["MongoDB", "PostgreSQL", "MySQL",  "Database Design", "Database Optimization"]
+          skills: ["MongoDB", "PostgreSQL", "MySQL", "Database Design", "Database Optimization"]
         },
-        // {
-        //   icon: Smartphone,
-        //   title: "Mobile",
-        //   skills: ["React Native", "PWA", "Responsive Design", "Mobile-First"]
-        // },
         {
           icon: Layout,
           title: "Design",
@@ -46,29 +56,24 @@ const Skills = ({ language }) => {
       categories: [
         {
           icon: Code,
-          title: "Frontend (Önyüz) Geliştirme",
-          skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "i18next", "Framer Motion", "Three.js", "Chakra UI", "Material-UI", "Vite", "ESLint", "Prettier", "Chart.js", "Duyarlı Tasarım", "Performans Optimizasyonu", "SEO En İyi Uygulamaları"]
+          title: "Frontend Geliştirme",
+          skills: ["React", "TailwindCSS", "JavaScript", "TypeScript", "Bootstrap", "HTML5", "CSS3", "Redux", "Vite", "ESLint", "Three.js", "Chakra UI", "Material-UI", "Chart.js", "Performans Optimizasyonu", "SEO En İyi Uygulamaları"]
         },
         {
           icon: Server,
           title: "Backend & API Mimarisi",
-          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs",  "WebSocket", "JWT", "API Development", "Authentication & Authorization", "Scalability", "Security Best Practices"]
+          skills: ["Node.js", "Express", "Java", "Spring Boot", "REST APIs", "WebSocket", "JWT", "Ölçeklenebilirlik", "Güvenlik En İyi Uygulamaları"]
         },
         {
           icon: Tool,
           title: "DevOps & Bulut Çözümleri",
-          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Cloud Deployment" ,"Hosting Services", "Containerization (Docker)","Version Control (Git)","DevOps Practices",]
+          skills: ["Git", "Docker", "CI/CD", "Linux", "Nginx", "Bulut Yayılım", "Hosting Servisleri", "DevOps Uygulamaları"]
         },
         {
           icon: Database,
           title: "Veritabanı",
-          skills: ["MongoDB", "PostgreSQL", "MySQL",  "Database Design", "Database Optimization"]
+          skills: ["MongoDB", "PostgreSQL", "MySQL", "Veritabanı Tasarımı", "Veritabanı Optimizasyonu"]
         },
-        // {
-        //   icon: Smartphone,
-        //   title: "Mobil",
-        //   skills: ["React Native", "PWA", "Duyarlı Tasarım", "Mobil-İlk"]
-        // },
         {
           icon: Layout,
           title: "Tasarım",
@@ -81,57 +86,60 @@ const Skills = ({ language }) => {
   const t = translations[language];
 
   return (
-    <section id="skills" className="py-10 md:py-20 md:px-4 bg-slate-900/50">
-      <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+    <section id="skills" className="py-16 md:py-24 px-4 bg-slate-900/50 relative overflow-hidden">
+      <div className="container mx-auto max-w-7xl relative z-10">
+        
+        {/* Başlık */}
+        <div
+          ref={headerRef}
+          className={`text-center mb-16 transition-all duration-1000 transform ${
+            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
             {t.title}
           </h2>
-          <p className="text-gray-400 text-lg">{t.subtitle}</p>
-        </motion.div>
+          <p className="text-gray-200 text-lg">{t.subtitle}</p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {t.categories.map((category, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 group"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <category.icon className="w-6 h-6 text-white" />
+        {/* Kategoriler Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {t.categories.map((category, index) => {
+            const [catRef, catInView] = useInView();
+            return (
+              <div
+                key={index}
+                ref={catRef}
+                style={{ transitionDelay: `${index * 100}ms` }}
+                className={`bg-slate-800/40 backdrop-blur-sm p-8 rounded-3xl border border-white/5 transition-all duration-700 transform ${
+                  catInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
+                } hover:border-purple-500/30 group`}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                    <category.icon className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white tracking-tight">{category.title}</h3>
                 </div>
-                <h3 className="text-xl font-bold text-white">{category.title}</h3>
-              </div>
 
-              <motion.ul className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.li
-                    key={skillIndex}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: skillIndex * 0.05 }}
-                    viewport={{ once: true }}
-                    className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30 hover:bg-purple-500/30 transition-colors duration-300 list-none"
-                  >
-                    {skill}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-          ))}
+                <ul className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, skillIndex) => (
+                    <li
+                      key={skillIndex}
+                      className="px-3 py-1.5 bg-slate-900/50 text-gray-100 rounded-xl text-xs md:text-sm border border-white/5 hover:border-purple-500/50 hover:text-purple-300 transition-all duration-300 cursor-default"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
+
+      {/* Arka Plan Dekorasyonu - Performans için statik */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none"></div>
     </section>
   );
 };
