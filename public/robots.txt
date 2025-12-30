@@ -1,13 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: /index.html
 
-# Teknik/Sistem klasörlerini engelle
-Disallow: /src/
-Disallow: /node_modules/
-Disallow: /assets/
-
-# Eğer ileride bir yönetim paneli veya özel bir yol eklersen:
-# Disallow: /admin/
-
-# Site haritası
-Sitemap: https://www.halilibrahimkocoglu.com.tr/sitemap.xml
+Sitemap: https://halilibrahimkocoglu.com.tr/sitemap.xml
