@@ -101,7 +101,7 @@ const About = ({ language }) => {
             
             {/* Küçük bir yüzen bilgi kartı (Social Proof) */}
             <div className="absolute -bottom-6 -right-6 bg-slate-900 border border-purple-500/30 p-4 rounded-xl hidden md:block z-20 backdrop-blur-xl">
-              <p className="text-white font-bold text-xl leading-none">5+</p>
+              <p className="text-white font-bold text-xl leading-none">3+</p>
               <p className="text-gray-400 text-xs uppercase tracking-tighter">
                 {language === 'tr' ? 'Yıllık Deneyim' : 'Years Experience'}
               </p>
