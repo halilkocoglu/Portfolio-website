@@ -2,10 +2,10 @@ import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Toaster } from './components/ui/toaster';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import About from './components/About';
 
 // Ağır bileşenleri "Lazy Load" ile yüklüyoruz. 
 // Bu sayede başlangıç paket boyutu (bundle size) küçülür.
-const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
 const Projects = lazy(() => import('./components/Projects'));
 const Skills = lazy(() => import('./components/Skills'));
@@ -48,11 +48,10 @@ function App() {
       
       <main id='main-section' className='flex flex-col min-h-screen'>
         <Hero language={language} />
-
-        {/* Diğer bölümler kullanıcı aşağı kaydırdıkça veya arka planda yüklenir */}
-        <Suspense fallback={<LoadingFallback />}>
           <About language={language} />
           <Experience language={language} />
+        {/* Diğer bölümler kullanıcı aşağı kaydırdıkça veya arka planda yüklenir */}
+        <Suspense fallback={<LoadingFallback />}>
           <Projects language={language} />
           <Skills language={language} />
           <Contact language={language} />

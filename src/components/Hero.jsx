@@ -8,7 +8,6 @@ const Hero = ({ language }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Sayfa yüklendiğinde animasyonları başlat
     setIsLoaded(true);
   }, []);
 
@@ -92,7 +91,7 @@ const Hero = ({ language }) => {
             </div>
 
             {/* Sosyal Medya */}
-            <div className={`flex gap-4 pt-6 ${animateIn('delay-[1200ms]')}`}>
+            <div className={`flex gap-4 pt-6 ${animateIn('animation-delay-[700ms]')}`}>
               {[
                 { icon: GithubIcon, href: 'https://github.com/halilkocoglu', label: 'GitHub' },
                 { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/halilkocoglu/', label: 'LinkedIn' },
@@ -130,7 +129,6 @@ const Hero = ({ language }) => {
                 />
               </div>
 
-              {/* Float eden teknoloji etiketleri gibi ekstra detaylar eklenebilir */}
             </div>
           </div>
         </div>

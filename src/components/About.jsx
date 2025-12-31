@@ -105,8 +105,7 @@ const About = ({ language }) => {
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
               <img 
-                loading="lazy" // Performans için kritik: Lazy loading
-                alt={language === 'tr' ? "Nazilli Aydın Web Tasarım" : "Web Design Aydın"} 
+                alt={language === 'tr' ? "Nazilli Aydın Web Tasarım" : "Web Design Aydın Nazilli"} 
                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
                 src="/codingmonitors.webp" 
               />
