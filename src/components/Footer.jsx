@@ -1,4 +1,3 @@
-import React from 'react';
 import { Mail, Heart } from 'lucide-react';
 import GithubIcon from '../assets/GithubIcon';
 import LinkedinIcon from '../assets/LinkedinIcon';
@@ -21,7 +20,7 @@ const Footer = ({ language }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-[100] w-full bg-footer border-t border-purple-500/20 py-10 px-4 mt-auto">
+    <footer className="relative z-[100] w-full bg-slate-950 border-t border-purple-500/20 py-10 px-4 mt-auto">
       <div className="container mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Code, Database, Layout, Server, Wrench as Tool } from 'lucide-react';
 
 const useInView = () => {
@@ -13,6 +13,38 @@ const useInView = () => {
     return () => observer.disconnect();
   }, []);
   return [ref, isVisible];
+};
+
+const CategoryCard = ({ category, index }) => {
+  const [catRef, catInView] = useInView();
+
+  return (
+    <div
+      ref={catRef}
+      style={{ transitionDelay: `${index * 100}ms` }}
+      className={`bg-slate-800/40 backdrop-blur-sm p-8 rounded-3xl border border-white/5 transition-all duration-700 transform ${
+        catInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
+      } hover:border-purple-500/30 group`}
+    >
+      <div className="flex items-center gap-4 mb-6">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+          <category.icon className="w-6 h-6 text-purple-400" />
+        </div>
+        <h3 className="text-xl font-bold text-white tracking-tight">{category.title}</h3>
+      </div>
+
+      <ul className="flex flex-wrap gap-2">
+        {category.skills.map((skill, skillIndex) => (
+          <li
+            key={skillIndex}
+            className="px-3 py-1.5 bg-slate-900/50 text-gray-100 rounded-xl text-xs md:text-sm border border-white/5 hover:border-purple-500/50 hover:text-purple-300 transition-all duration-300 cursor-default"
+          >
+            {skill}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 const Skills = ({ language }) => {
@@ -88,7 +120,7 @@ const Skills = ({ language }) => {
   return (
     <section id="skills" className="py-16 md:py-24 px-4 bg-slate-900/50 relative overflow-hidden">
       <div className="container mx-auto max-w-7xl relative z-10">
-        
+
         {/* Başlık */}
         <div
           ref={headerRef}
@@ -104,41 +136,13 @@ const Skills = ({ language }) => {
 
         {/* Kategoriler Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {t.categories.map((category, index) => {
-            const [catRef, catInView] = useInView();
-            return (
-              <div
-                key={index}
-                ref={catRef}
-                style={{ transitionDelay: `${index * 100}ms` }}
-                className={`bg-slate-800/40 backdrop-blur-sm p-8 rounded-3xl border border-white/5 transition-all duration-700 transform ${
-                  catInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
-                } hover:border-purple-500/30 group`}
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                    <category.icon className="w-6 h-6 text-purple-400" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white tracking-tight">{category.title}</h3>
-                </div>
-
-                <ul className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <li
-                      key={skillIndex}
-                      className="px-3 py-1.5 bg-slate-900/50 text-gray-100 rounded-xl text-xs md:text-sm border border-white/5 hover:border-purple-500/50 hover:text-purple-300 transition-all duration-300 cursor-default"
-                    >
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
+          {t.categories.map((category, index) => (
+            <CategoryCard key={index} category={category} index={index} />
+          ))}
         </div>
       </div>
 
-      {/* Arka Plan Dekorasyonu - Performans için statik */}
+      {/* Arka Plan Dekorasyonu */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none"></div>
     </section>
   );

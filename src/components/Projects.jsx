@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
+import GithubIcon from '../assets/GithubIcon';
 
-// Performans için Intersection Observer Hook
 const useInView = () => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -19,6 +19,94 @@ const useInView = () => {
   return [ref, isVisible];
 };
 
+const ProjectCard = ({ project, index, viewLive, viewSite }) => {
+  const [itemRef, itemInView] = useInView();
+
+  return (
+    <div
+      ref={itemRef}
+      style={{ transitionDelay: `${(index % 3) * 150}ms` }}
+      className={`bg-slate-900/60 rounded-3xl overflow-hidden border border-white/5 transition-all duration-700 transform ${
+        itemInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      } group hover:border-purple-500/40 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2`}
+    >
+      {/* Görsel Alanı */}
+      <div className="relative h-52 overflow-hidden bg-slate-800">
+        <img
+          loading="lazy"
+          decoding="async"
+          alt={project.title}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+          src={project.image || "/projectplaceholderimage.webp"}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+      </div>
+
+      {/* İçerik Alanı */}
+      <div className="p-6 md:p-7 flex flex-col h-[calc(100%-13rem)]">
+        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-gray-200 text-sm leading-relaxed mb-5 line-clamp-3">
+          {project.description}
+        </p>
+
+        {/* Teknolojiler */}
+        <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+          {project.technologies.slice(0, 5).map((tech, techIndex) => (
+            <span
+              key={techIndex}
+              className="px-2.5 py-1 bg-slate-800/80 text-purple-300 rounded-lg text-[10px] md:text-xs font-medium border border-white/5"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Butonlar */}
+        <div className="flex gap-3">
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block flex-1"
+            >
+              <Button
+                size="sm"
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:opacity-90 text-white rounded-xl py-5 font-semibold transition-all active:scale-95"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                {viewSite}
+              </Button>
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`block ${project.url ? '' : 'flex-1'}`}
+            >
+              <Button
+                size="sm"
+                variant={project.url ? 'outline' : 'default'}
+                className={`${project.url
+                  ? 'border-purple-400/50 text-white hover:bg-purple-500/20 rounded-xl py-5'
+                  : 'w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:opacity-90 text-white rounded-xl py-5 font-semibold'
+                } transition-all active:scale-95`}
+              >
+                <GithubIcon size={16} className="mr-2" />
+                {project.url ? 'GitHub' : viewLive}
+              </Button>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Projects = ({ language }) => {
   const [headerRef, headerInView] = useInView();
 
@@ -27,6 +115,7 @@ const Projects = ({ language }) => {
       title: "Projects",
       subtitle: "Custom Software Solutions & Web Applications",
       viewLive: "Project Details",
+      viewSite: "Visit Site",
       projects: [
         {
           title: "ATM Wire Business Management System (CMS)",
@@ -35,24 +124,38 @@ const Projects = ({ language }) => {
           image: "/ATM-logo.webp"
         },
         {
+          title: "Alka Yapı — Construction & Decoration Website",
+          description: "Corporate website for a Nazilli-based construction, interior design and renovation company. Features project portfolio, service pages and consultation request flow.",
+          technologies: ["React", "Tailwind CSS", "Vite", "SEO Optimization", "Responsive Design"],
+          image: "/projectplaceholderimage.webp",
+          url: "https://www.alkayapiinsaat.com/"
+        },
+        {
+          title: "Nazilli Korkmaz Optik — Product & Blog Website",
+          description: "Promotional website for a local optical company featuring product showcase, informational blog posts, and local SEO optimization.",
+          technologies: ["React", "Tailwind CSS", "Vite", "Blog", "SEO Optimization"],
+          image: "/projectplaceholderimage.webp",
+          url: "https://nazillikorkmazoptik.com.tr/"
+        },
+        {
           title: "Full-Stack Car Rental Application",
           description: "A comprehensive car rental solution with integrated reservation systems, fleet tracking, and responsive user interface for seamless bookings.",
           technologies: ["React", "Spring Boot", "JPA", "PostgreSQL", "WebSocket"],
-          github : "https://github.com/halilkocoglu/Full-Stack-RentACar"
+          github: "https://github.com/halilkocoglu/Full-Stack-RentACar"
         },
         {
           title: "Educational Institution & University Website",
           description: "SEO-friendly educational portal featuring student management, course catalogs, and dynamic event systems using Node.js and MongoDB.",
           technologies: ["Node.js", "Express", "MongoDB", "EJS", "HTML5/CSS3"],
           image: "/smart-edu.webp",
-          github : "https://github.com/halilkocoglu/smart-edu-project"
+          github: "https://github.com/halilkocoglu/smart-edu-project"
         },
         {
           title: "Portfolio Website",
           description: "Personal single page portfolio website built with modern tech stack.",
           technologies: ["React", "Radix UI", "Lucide React", "Tailwind CSS", "Netlify"],
           image: "/portfolio.webp",
-          github : "https://github.com/halilkocoglu/Portfolio-website"
+          github: "https://github.com/halilkocoglu/Portfolio-website"
         }
       ]
     },
@@ -60,6 +163,7 @@ const Projects = ({ language }) => {
       title: "Projeler",
       subtitle: "Özel Yazılım Çözümleri ve Web Uygulamaları",
       viewLive: "Proje Detayları",
+      viewSite: "Siteyi Ziyaret Et",
       projects: [
         {
           title: "ATM Tel Örgü İş Yönetim Sistemi (CMS)",
@@ -68,24 +172,38 @@ const Projects = ({ language }) => {
           image: "/ATM-logo.webp"
         },
         {
+          title: "Alka Yapı — İnşaat & Dekorasyon Web Sitesi",
+          description: "Nazilli merkezli inşaat, iç mimari ve dekorasyon firması için kurumsal web sitesi. Proje portföyü, hizmet sayfaları ve ücretsiz keşif talep akışı içerir.",
+          technologies: ["React", "Tailwind CSS", "Vite", "SEO Optimizasyonu", "Responsive Tasarım"],
+          image: "/projectplaceholderimage.webp",
+          url: "https://www.alkayapiinsaat.com/"
+        },
+        {
+          title: "Nazilli Korkmaz Optik — Ürün & Blog Web Sitesi",
+          description: "Yerel optik firması için ürün tanıtımı ve bilgilendirme blog yazılarını bir arada sunan, yerel SEO odaklı tanıtım web sitesi.",
+          technologies: ["React", "Tailwind CSS", "Vite", "Blog", "SEO Optimizasyonu"],
+          image: "/projectplaceholderimage.webp",
+          url: "https://nazillikorkmazoptik.com.tr/"
+        },
+        {
           title: "Uçtan Uca Araç Kiralama Uygulaması",
           description: "Entegre rezervasyon sistemi, filo takibi ve kullanıcı dostu arayüze sahip kapsamlı bir araç kiralama web yazılımı çözümü.",
           technologies: ["React", "Spring Boot", "JPA", "PostgreSQL", "WebSocket"],
-          github : "https://github.com/halilkocoglu/Full-Stack-RentACar"
+          github: "https://github.com/halilkocoglu/Full-Stack-RentACar"
         },
         {
           title: "Üniversite ve Eğitim Kurumu Web Sitesi",
           description: "Öğrenci yönetimi, kurs katalogları ve dinamik etkinlik sistemleri içeren, SEO uyumlu eğitim portalı yazılımı.",
           technologies: ["Node.js", "Express", "MongoDB", "EJS", "HTML5/CSS3"],
           image: "/smart-edu.webp",
-          github : "https://github.com/halilkocoglu/smart-edu-project"
+          github: "https://github.com/halilkocoglu/smart-edu-project"
         },
         {
           title: "Portföy Web Sitesi",
           description: "Modern teknolojilerle geliştirilmiş kişisel tek sayfa portföy web sitesi.",
           technologies: ["React", "Radix UI", "Lucide React", "Tailwind CSS", "Netlify"],
           image: "/portfolio.webp",
-          github : "https://github.com/halilkocoglu/Portfolio-website"
+          github: "https://github.com/halilkocoglu/Portfolio-website"
         }
       ]
     }
@@ -111,71 +229,15 @@ const Projects = ({ language }) => {
 
         {/* Projeler Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {t.projects.map((project, index) => {
-            const [itemRef, itemInView] = useInView();
-            return (
-              <div
-                key={index}
-                ref={itemRef}
-                style={{ transitionDelay: `${(index % 3) * 150}ms` }}
-                className={`bg-slate-900/60 rounded-3xl overflow-hidden border border-white/5 transition-all duration-700 transform ${
-                  itemInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                } group hover:border-purple-500/40 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2`}
-              >
-                {/* Görsel Alanı */}
-                <div className="relative h-52 overflow-hidden bg-slate-800">
-                  <img 
-                    loading="lazy"
-                    decoding="async"
-                    alt={`${project.title}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-                    src={project.image || "/projectplaceholderimage.webp"} 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
-                </div>
-
-                {/* İçerik Alanı */}
-                <div className="p-6 md:p-7 flex flex-col h-[calc(100%-13rem)]">
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-200 text-sm leading-relaxed mb-5 line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  {/* Teknolojiler */}
-                  <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                    {project.technologies.slice(0, 5).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2.5 py-1 bg-slate-800/80 text-purple-300 rounded-lg text-[10px] md:text-xs font-medium border border-white/5"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Buton */}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target='_blank'
-                      rel="noopener noreferrer"
-                      className="block w-full"
-                    >
-                      <Button
-                        size="sm"
-                        className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:opacity-90 text-white rounded-xl py-5 font-semibold transition-all active:scale-95"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        {t.viewLive}
-                      </Button>
-                    </a>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          {t.projects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              project={project}
+              index={index}
+              viewLive={t.viewLive}
+              viewSite={t.viewSite}
+            />
+          ))}
         </div>
       </div>
     </section>
