@@ -1,16 +1,74 @@
-# React + Vite
+# Halil İbrahim Koçoğlu — Kişisel Portföy Web Sitesi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Nazilli / Aydın merkezli Full Stack Web Geliştirici **Halil İbrahim Koçoğlu**'nun kişisel portföy sitesi.
 
-Currently, two official plugins are available:
+**Canlı Site:** [halilibrahimkocoglu.com.tr](https://www.halilibrahimkocoglu.com.tr)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Özellikler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- TR / EN dil desteği
+- Tamamen duyarlı (responsive) tasarım
+- Lazy load + Intersection Observer animasyonları
+- Schema.org yapılandırılmış veri (Person + ProfessionalService)
+- Open Graph & Twitter Card meta tagları
+- LCP görseli için `preload` optimizasyonu
+- Özel 404 sayfası
 
-## Expanding the ESLint configuration
+## Teknolojiler
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Katman  | Teknoloji                                      |
+| ------- | ---------------------------------------------- |
+| UI      | React 18, Tailwind CSS, Radix UI, Lucide React |
+| Build   | Vite                                           |
+| Hosting | cPanel / Apache (.htaccess)                    |
+
+## Kurulum
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+Çıktı `dist/` klasörüne yazılır.
+
+## Proje Yapısı
+
+```text
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── Hero.jsx
+│   ├── About.jsx
+│   ├── Experience.jsx
+│   ├── Projects.jsx
+│   ├── Skills.jsx
+│   ├── Contact.jsx
+│   ├── Footer.jsx
+│   ├── ErrorPage.jsx
+│   └── ui/          # button, toast, toaster
+├── assets/          # SVG ikonlar
+├── lib/
+├── App.jsx
+├── main.jsx
+└── index.css
+public/
+├── profilepicture.webp
+├── postpicture.webp
+├── robots.txt
+├── sitemap.xml
+└── .htaccess
+```
+
+## İletişim
+
+- GitHub: [github.com/halilkocoglu](https://github.com/halilkocoglu)
+- LinkedIn: [linkedin.com/in/halilkocoglu](https://www.linkedin.com/in/halilkocoglu/)
+- E-posta: [halilkocoglu98@gmail.com](mailto:halilkocoglu98@gmail.com)
