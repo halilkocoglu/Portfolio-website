@@ -85,7 +85,7 @@ const Hero = ({ language }) => {
               </h1>
             </div>
 
-            <p className={`text-slate-600 text-lg leading-relaxed max-w-md ${fadeUp('delay-300')}`}>
+            <p className={`text-slate-600 text-md md:text-lg leading-relaxed max-w-md ${fadeUp('delay-300')}`}>
               {t.description}
             </p>
 

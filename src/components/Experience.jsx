@@ -65,7 +65,7 @@ const Experience = ({ language }) => {
 
   return (
     <section id="experience" className="py-20 md:py-28 px-1 sm:px-4 overflow-hidden bg-white/30">
-      <div className="container mx-auto max-w-5xl">
+      <div className="container p-5 mx-auto max-w-5xl">
         <div
           ref={titleRef}
           className={`text-center mb-16 transition-all duration-700 transform ${titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}

@@ -282,7 +282,7 @@ const Projects = ({ language }) => {
 
   return (
     <section id="projects" className="py-20 md:py-28 px-1 sm:px-4 overflow-hidden">
-      <div className="container mx-auto max-w-7xl">
+      <div className="container p-5 mx-auto max-w-7xl">
         <div
           ref={headerRef}
           className={`text-center mb-16 transition-all duration-700 transform ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}

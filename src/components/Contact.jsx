@@ -62,16 +62,16 @@ const Contact = ({ language }) => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 px-1 sm:px-4 overflow-hidden bg-white/30">
-      <div className="container mx-auto max-w-7xl">
+    <section id="contact" className="py-20 md:py-28 px-0  md:px-4 overflow-hidden bg-white/30">
+      <div className="container p-5 mx-auto max-w-7xl">
         <div
           ref={headerRef}
           className={`text-center mb-16 transition-all duration-700 transform ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-100 text-violet-700 text-sm font-semibold mb-4 border border-violet-200/60">
+          <span className="inline-block px-1 py-1.5 rounded-full bg-violet-100 text-violet-700 text-sm font-semibold mb-4 border border-violet-200/60">
             {t.subtitle}
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
             {t.title}
           </h2>
         </div>
@@ -81,20 +81,20 @@ const Contact = ({ language }) => {
           className={`grid md:grid-cols-2 gap-8 lg:gap-14 items-start transition-all duration-700 delay-100 transform ${contentInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           {/* Contact cards */}
-          <div className="space-y-4">
+          <div className="space-y-4 ">
             {t.contactInfo.map((info, index) => {
               const colorClass = iconStyle[info.icon.displayName || info.icon.name] || iconStyle.Mail;
               return (
                 <div
                   key={index}
                   onClick={() => handleCopy(info.value, info.copyable, index)}
-                  className={`flex items-center gap-4 p-5 rounded-2xl border bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 ${
+                  className={`flex items-center gap-4 p-2 md:p-5 rounded-2xl border bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 ${
                     info.copyable
                       ? 'border-slate-200/60 hover:border-violet-300 hover:shadow-md cursor-pointer group hover:-translate-y-0.5'
                       : 'border-slate-200/40 cursor-default'
                   }`}
                 >
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 border ${colorClass}`}>
+                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 border ${colorClass}`}>
                     <info.icon className="w-5 h-5" />
                   </div>
 
@@ -117,7 +117,7 @@ const Contact = ({ language }) => {
           </div>
 
           {/* Image */}
-          <div className="relative h-56 md:h-80 lg:h-[380px] rounded-3xl overflow-hidden shadow-xl shadow-slate-300/30 border border-white">
+          <div className="relative h-50 md:h-80 lg:h-[380px] rounded-3xl overflow-hidden shadow-xl shadow-slate-300/30 border border-white">
             <img
               loading="lazy"
               alt={language === 'tr' ? "Halil İbrahim Koçoğlu İletişim" : "Contact Halil İbrahim Koçoğlu"}
