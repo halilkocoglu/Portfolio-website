@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Code2, Palette, Rocket, Users, MapPin } from 'lucide-react';
+import { Code2, Palette, Rocket, MapPin } from 'lucide-react';
 
 const useInView = () => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => entry.isIntersecting && setIsVisible(true),
@@ -13,66 +12,34 @@ const useInView = () => {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
-
   return [ref, isVisible];
 };
-const About = ({ language }) => {
 
+const About = ({ language }) => {
   const [headerRef, headerInView] = useInView();
   const [contentRef, contentInView] = useInView();
+
   const translations = {
     en: {
       title: "About Me",
-      subtitle: "Professional Software Solutions in Aydın & Nazilli", 
+      subtitle: "Professional Software Solutions in Aydın & Nazilli",
       description: "I am a Full-Stack Web Developer specialized in Java Spring Boot and React, providing professional digital services in the Nazilli and Aydın regions. Beyond writing code, I deliver end-to-end solutions ranging from corporate website design to scalable backend systems. My mission is to transform the business requirements of local and global brands into high-performance, SEO-friendly digital experiences.",
       highlights: [
-        {
-          icon: Code2,
-          title: "Custom Development", 
-          description: "Tailor-made software solutions for your business needs."
-        },
-        {
-          icon: Palette,
-          title: "Modern UI/UX",
-          description: "Responsive, mobile-friendly, and conversion-oriented designs."
-        },
-        {
-          icon: Rocket,
-          title: "SEO & Visibility", 
-          description: "Top rankings in local searches like 'Nazilli Web Design'."
-        },
-        {
-          icon: Users,
-          title: "Regional Support", 
-          description: "On-site and remote support for businesses in Aydın."
-        }
+        { icon: Code2, title: "Custom Development", description: "Tailor-made software solutions for your business needs." },
+        { icon: Palette, title: "Modern UI/UX", description: "Responsive, mobile-friendly, and conversion-oriented designs." },
+        { icon: Rocket, title: "SEO & Visibility", description: "Top rankings in local searches like 'Nazilli Web Design'." },
+        { icon: MapPin, title: "Regional Support", description: "On-site and remote support for businesses in Aydın." }
       ]
     },
     tr: {
       title: "Hakkımda",
       subtitle: "Nazilli ve Aydın Bölgesinde Profesyonel Yazılım Çözümleri",
-      description: "Java Spring Boot ve React teknolojilerinde uzmanlaşmış, Nazilli ve Aydın çevresinde profesyonel dijital hizmetler sunan bir Full-Stack Web Geliştiricisiyim. Sadece kod yazmakla kalmıyor, kurumsal web sitesi tasarımından ölçeklenebilir backend sistemlerine kadar uçtan uca çözümler üretiyorum. Amacım, Aydın ve Nazilli'deki yerel işletmelerin ve küresel markaların iş gereksinimlerini yüksek performanslı ve SEO uyumlu dijital deneyimlere dönüştürmektir.",
+      description: "Java Spring Boot ve React teknolojilerinde uzmanlaşmış, Nazilli ve Aydın çevresinde profesyonel dijital hizmetler sunan bir Full-Stack Web Geliştiricisiyim. Sadece kod yazmakla kalmıyor, kurumsal web sitesi tasarımından ölçeklenebilir backend sistemlerine kadar uçtan uca çözümler üretiyorum. Amacım, yerel işletmelerin ve küresel markaların iş gereksinimlerini yüksek performanslı ve SEO uyumlu dijital deneyimlere dönüştürmektir.",
       highlights: [
-        {
-          icon: Code2,
-          title: "Özel Yazılım",
-          description: "İhtiyaçlarınıza yönelik butik ve ölçeklenebilir çözümler."
-        },
-        {
-          icon: Palette,
-          title: "Modern Tasarım",
-          description: "Mobil uyumlu, şık ve kullanıcı odaklı arayüzler."
-        },
-        {
-          icon: Rocket,
-          title: "SEO & Görünürlük",
-          description: "Arama motorlarında (Google) üst sıralarda yer alma garantisi."
-        },
-        {
-          icon: MapPin, // İkonu MapPin olarak güncelledim
-          title: "Yerel Destek",
-          description: "Aydın ve Nazilli içi yüz yüze görüşme ve hızlı destek."
-        }
+        { icon: Code2, title: "Özel Yazılım", description: "İhtiyaçlarınıza yönelik butik ve ölçeklenebilir çözümler." },
+        { icon: Palette, title: "Modern Tasarım", description: "Mobil uyumlu, şık ve kullanıcı odaklı arayüzler." },
+        { icon: Rocket, title: "SEO & Görünürlük", description: "Google'da üst sıralarda yer alma hedefi." },
+        { icon: MapPin, title: "Yerel Destek", description: "Aydın ve Nazilli içi yüz yüze görüşme ve hızlı destek." }
       ]
     }
   };
@@ -80,50 +47,44 @@ const About = ({ language }) => {
   const t = translations[language];
 
   return (
-    <section id="about" className="py-16 md:py-24 px-4 sm:px-6 overflow-hidden">
+    <section id="about" className="py-20 md:py-28 px-1 sm:px-6 overflow-hidden">
       <div className="container mx-auto max-w-7xl">
-        {/* Başlık Alanı */}
         <div
           ref={headerRef}
-          className={`text-center mb-16 transition-all duration-1000 transform ${
-            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className={`text-center mb-16 transition-all duration-700 transform ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 bg-clip-text text-transparent italic">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-100 text-violet-700 text-sm font-semibold mb-4 border border-violet-200/60">
+            {t.subtitle}
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
             {t.title}
           </h2>
-          <p className="text-purple-400 font-mono text-sm md:text-lg tracking-widest uppercase">
-            {t.subtitle}
-          </p>
         </div>
 
-        <div ref={contentRef} className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Görsel Alanı */}
-          <div className={`relative group transition-all duration-1000 delay-200 transform ${
-            contentInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-          }`}>
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-              <img 
-                alt={language === 'tr' ? "Nazilli Aydın Web Tasarım" : "Web Design Aydın Nazilli"} 
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
-                src="/codingmonitors.webp" 
+        <div ref={contentRef} className="grid lg:grid-cols-2 gap-14 items-start">
+          {/* Image */}
+          <div className={`relative transition-all duration-700 delay-100 transform ${contentInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/40 border border-white">
+              <img
+                alt={language === 'tr' ? "Nazilli Aydın Web Tasarım" : "Web Design Aydın Nazilli"}
+                className="w-full h-full object-cover aspect-video"
+                src="/codingmonitors.webp"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-950/30 via-transparent to-transparent"></div>
             </div>
-            {/* Sosyal Proof Kartı */}
-            <div className="absolute -bottom-6 -right-6 bg-slate-900 border border-purple-500/30 p-4 rounded-xl hidden md:block z-20 backdrop-blur-xl">
-              <p className="text-white font-bold text-xl leading-none">3+</p>
-              <p className="text-gray-200 text-xs uppercase tracking-tighter">
+
+            {/* Floating badge */}
+            <div className="absolute -bottom-5 -right-4 bg-white/90 backdrop-blur-xl border border-slate-200/70 shadow-xl rounded-2xl px-5 py-3 hidden md:block">
+              <p className="text-2xl font-extrabold text-violet-700">3+</p>
+              <p className="text-slate-500 text-xs font-medium uppercase tracking-wide">
                 {language === 'tr' ? 'Yıllık Deneyim' : 'Years Experience'}
               </p>
             </div>
           </div>
 
-          {/* Metin ve Kartlar Alanı */}
-          <div className={`flex flex-col justify-center transition-all duration-1000 delay-400 transform ${
-            contentInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`}>
-            <p className="text-gray-200 text-lg md:text-xl leading-relaxed mb-8">
+          {/* Text + cards */}
+          <div className={`transition-all duration-700 delay-200 transform ${contentInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+            <p className="text-slate-600 text-lg leading-relaxed mb-8">
               {t.description}
             </p>
 
@@ -131,13 +92,13 @@ const About = ({ language }) => {
               {t.highlights.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-slate-900/50 backdrop-blur-sm p-5 rounded-2xl border border-white/5 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-lg"
+                  className="bg-white/70 backdrop-blur-sm p-5 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-md hover:border-violet-300/50 hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4 text-purple-400 border border-purple-500/20">
-                    <item.icon size={22} />
+                  <div className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center mb-3 text-violet-700 border border-violet-200/50">
+                    <item.icon size={20} />
                   </div>
-                  <h3 className="text-white font-bold mb-1 tracking-tight">{item.title}</h3>
-                  <p className="text-gray-200 text-sm leading-snug">{item.description}</p>
+                  <h3 className="text-slate-900 font-bold text-sm mb-1">{item.title}</h3>
+                  <p className="text-slate-500 text-sm leading-snug">{item.description}</p>
                 </div>
               ))}
             </div>

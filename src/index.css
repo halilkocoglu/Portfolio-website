@@ -4,45 +4,29 @@
 
 @layer base {
   :root {
-    /* Genel Arkaplan ve Önplan Renkleri */
-    --background: 222.2 84% 4.9%;    /* Çok Koyu Mavi/Lacivert */
-    --foreground: 210 40% 98%;      /* Açık Beyaz */
-
-    /* Birincil Renk (Mor/Eflatun - Sitenizin gradyanına uygun) */
-    --primary: 271 76% 53%;         /* Parlak Mor (#a855f7) */
-    --primary-foreground: 210 40% 98%; /* Primary üzerinde Beyaz metin */
-
-    /* İkincil Renk (Genellikle daha sakin, gri tonlu) */
-    --secondary: 217.2 32.4% 17.5%; /* Koyu Gri Mavi */
-    --secondary-foreground: 210 40% 98%;
-
-    /* Vurgu (Highlight) Renkleri */
-    --accent: 271 76% 40%;          /* Koyu Mor */
-    --accent-foreground: 210 40% 98%;
-
-    /* Kart ve Popover Arkaplanları (Arkaplandan biraz daha açık/farklı) */
-    --card: 222.2 84% 6.9%;         /* Koyu kart arkaplanı */
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 6.9%;
-    --popover-foreground: 210 40% 98%;
-
-    /* Sınır, Giriş Alanı ve Odak Çevresi Renkleri */
-    --border: 217.2 32.4% 27.5%;     /* Orta Koyu Gri sınır */
-    --input: 217.2 32.4% 27.5%;      /* Giriş alanı arkaplanı */
-    --ring: 271 76% 53%;             /* Odak halkası (primary rengi) */
-
-    /* Sessiz (Muted) Renkler (İkincil metinler, açıklamalar) */
-    --muted: 217.2 32.4% 37.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    /* Yıkıcı (Hata/Tehlike) Renk */
-    --destructive: 0 62.8% 30.6%;   /* Kırmızı */
-    --destructive-foreground: 210 40% 98%;
-
-    /* Ayrıca tailwind.config.cjs'de kullanılan bu değişkeni de tanımlayalım */
-    --radius: 0.5rem;
+    --background: 250 100% 99%;
+    --foreground: 222 47% 11%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --accent: 262 83% 96%;
+    --accent-foreground: 262 83% 30%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 262 83% 58%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --radius: 0.75rem;
   }
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -51,44 +35,42 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #0f172a;
-  color: #ffffff;
+  color: #0f172a;
   overflow-x: hidden;
+  background-color: #f5f3ff;
+  background-image:
+    radial-gradient(ellipse at 10% 30%, rgba(139, 92, 246, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 10%, rgba(236, 72, 153, 0.09) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 85%, rgba(99, 102, 241, 0.10) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #ede9fe;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #a855f7 0%, #ec4899 100%);
-  border-radius: 5px;
+  background: linear-gradient(180deg, #7c3aed 0%, #db2777 100%);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #9333ea 0%, #db2777 100%);
+  background: linear-gradient(180deg, #6d28d9 0%, #be185d 100%);
 }
 
-/* Animations */
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .animate-gradient {
@@ -96,8 +78,16 @@ html {
   animation: gradient 15s ease infinite;
 }
 
-/* Focus styles for accessibility */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
 *:focus-visible {
-  outline: 2px solid #a855f7;
+  outline: 2px solid #7c3aed;
   outline-offset: 2px;
 }

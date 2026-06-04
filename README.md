@@ -39,6 +39,15 @@ npm run build
 
 Çıktı `dist/` klasörüne yazılır.
 
+## Demolar
+
+Netlify üzerinde yayınlanan örnek demo projeler:
+
+| Proje | Canlı Demo |
+| ----- | ---------- |
+| Sağlıklı Yaşam | [saglikli-yasam-demo.netlify.app](https://saglikli-yasam-demo.netlify.app) |
+| Genç Data | [genc-data-demo.netlify.app](https://genc-data-demo.netlify.app) |
+
 ## Proje Yapısı
 
 ```text
