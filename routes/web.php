@@ -6,6 +6,7 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 // Turkish (default, no prefix)
 Route::middleware('locale')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/web-sitesi-hizmetleri', [ServiceController::class, 'index'])->name('services');
     Route::get('/projeler', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/projeler/{slug}', [ProjectController::class, 'show'])->name('projects.show');
     Route::get('/deneyim', [ExperienceController::class, 'index'])->name('experience');
@@ -29,6 +31,7 @@ Route::middleware('locale')->group(function () {
 // English (/en prefix)
 Route::prefix('en')->middleware('locale')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.en');
+    Route::get('/website-services', [ServiceController::class, 'index'])->name('services.en');
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index.en');
     Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show.en');
     Route::get('/experience', [ExperienceController::class, 'index'])->name('experience.en');

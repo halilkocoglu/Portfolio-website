@@ -3,6 +3,7 @@
 return [
     'nav' => [
         'home' => 'Anasayfa',
+        'services' => 'Web Sitesi Hizmetleri',
         'projects' => 'Projeler',
         'experience' => 'Deneyim',
         'skills' => 'Yetenekler',
@@ -98,6 +99,6 @@ return [
     ],
 
     'meta' => [
-        'site_name' => 'Halil İbrahim Koçoğlu — Full Stack Web Geliştirici',
+        'site_name' => 'Halil İbrahim Koçoğlu | Nazilli Web Sitesi & Web Tasarım',
     ],
 ];

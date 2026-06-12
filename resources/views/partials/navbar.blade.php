@@ -1,6 +1,7 @@
 @php
     $navLinks = [
         'home' => __('site.nav.home'),
+        'services' => __('site.nav.services'),
         'experience' => __('site.nav.experience'),
         'projects.index' => __('site.nav.projects'),
         'skills' => __('site.nav.skills'),

@@ -8,6 +8,11 @@
         <title>{{ $title ?? __('site.meta.site_name') }}</title>
         <meta name="description" content="{{ $description ?? \App\Models\Setting::get(app()->getLocale() === 'en' ? 'site_description_en' : 'site_description_tr') }}">
 
+        {{-- Local SEO --}}
+        <meta name="geo.region" content="TR-09">
+        <meta name="geo.placename" content="Nazilli, Aydın">
+        <meta name="ICBM" content="37.9167, 28.3167">
+
         {{-- hreflang alternates --}}
         @isset($hreflang)
             @foreach ($hreflang as $locale => $url)

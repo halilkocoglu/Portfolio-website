@@ -14,6 +14,7 @@ class SitemapController extends Controller
 
         $staticRoutes = [
             ['tr' => 'home', 'en' => 'home.en'],
+            ['tr' => 'services', 'en' => 'services.en'],
             ['tr' => 'projects.index', 'en' => 'projects.index.en'],
             ['tr' => 'experience', 'en' => 'experience.en'],
             ['tr' => 'skills', 'en' => 'skills.en'],

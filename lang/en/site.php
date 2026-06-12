@@ -3,6 +3,7 @@
 return [
     'nav' => [
         'home' => 'Home',
+        'services' => 'Website Services',
         'projects' => 'Projects',
         'experience' => 'Experience',
         'skills' => 'Skills',
@@ -98,6 +99,6 @@ return [
     ],
 
     'meta' => [
-        'site_name' => 'Halil İbrahim Koçoğlu — Full Stack Web Developer',
+        'site_name' => 'Halil İbrahim Koçoğlu | Nazilli & Aydın Web Design',
     ],
 ];

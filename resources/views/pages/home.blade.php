@@ -35,6 +35,32 @@
     ])),
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
 </script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'ProfessionalService',
+    'name' => 'Halil İbrahim Koçoğlu — Web Sitesi Tasarımı',
+    'image' => $ogImage = \App\Models\Setting::get('og_image') ? \Illuminate\Support\Facades\Storage::url(\App\Models\Setting::get('og_image')) : null,
+    'url' => route('home'),
+    'telephone' => \App\Models\Setting::get('phone'),
+    'email' => \App\Models\Setting::get('email'),
+    'priceRange' => '$$',
+    'address' => [
+        '@type' => 'PostalAddress',
+        'addressLocality' => 'Nazilli',
+        'addressRegion' => 'Aydın',
+        'addressCountry' => 'TR',
+    ],
+    'areaServed' => [
+        ['@type' => 'City', 'name' => 'Nazilli'],
+        ['@type' => 'AdministrativeArea', 'name' => 'Aydın'],
+    ],
+    'sameAs' => array_values(array_filter([
+        \App\Models\Setting::get('github_url'),
+        \App\Models\Setting::get('linkedin_url'),
+    ])),
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+</script>
 @endpush
 
 @section('content')

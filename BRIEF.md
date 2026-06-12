@@ -77,8 +77,10 @@ public function getTitleAttribute(): string
 
 ## 📁 Proje Yapısı
 
+> Proje dosyaları repo kökünde (root) yer alır — ayrı bir `portfolio/` alt klasörü yoktur.
+
 ```
-portfolio/
+.
 ├── app/
 │   ├── Models/
 │   │   ├── Project.php           # Proje (portföy öğesi)
@@ -235,6 +237,20 @@ id, key, value, created_at, updated_at
 | `hero_title_en` | Hero başlık (EN) |
 | `hero_subtitle_tr` | Hero alt başlık (TR) |
 | `hero_subtitle_en` | Hero alt başlık (EN) |
+| `services_title_tr` / `_en` | Hizmetler sayfası başlığı |
+| `services_subtitle_tr` / `_en` | Hizmetler sayfası alt başlığı |
+| `services_intro_tr` / `_en` | Hizmetler sayfası giriş metni |
+| `services_packages_title_tr` / `_en` | "Hizmet Paketlerim" bölüm başlığı |
+| `services_packages_tr` / `_en` | Hizmet paketleri (JSON: title, desc, features[]) |
+| `services_why_title_tr` / `_en` | "Neden Beni Seçmelisiniz" bölüm başlığı |
+| `services_why_items_tr` / `_en` | Neden beni seçmelisiniz maddeleri (JSON: title, desc) |
+| `services_faq_title_tr` / `_en` | SSS bölüm başlığı |
+| `services_faq_items_tr` / `_en` | SSS maddeleri (JSON: q, a) — `FAQPage` JSON-LD için kullanılır |
+| `services_cta_title_tr` / `_en` | Hizmetler sayfası CTA başlığı |
+| `services_cta_subtitle_tr` / `_en` | Hizmetler sayfası CTA açıklaması |
+| `services_cta_button_tr` / `_en` | Hizmetler sayfası CTA buton metni |
+
+> `services_*` key'leri admin panelde **⚙️ Hizmetler Sayfası** üzerinden TR/EN olarak düzenlenebilir (paketler, "neden beni seçmelisiniz" ve SSS alanları Filament `Repeater` ile yönetilir, JSON olarak saklanır).
 
 ---
 
@@ -243,6 +259,7 @@ id, key, value, created_at, updated_at
 | Sayfa | URL (TR) | URL (EN) | Açıklama |
 |---|---|---|---|
 | Ana Sayfa | `/` | `/en/` | Hero, hakkımda özeti, öne çıkan projeler, yetenekler özeti, son blog yazıları, CTA |
+| Hizmetler | `/web-sitesi-hizmetleri` | `/en/website-services` | Nazilli/Aydın web sitesi hizmetleri: paketler, "neden beni seçmelisiniz", SSS, CTA — local SEO odaklı |
 | Projeler | `/projeler` | `/en/projects` | Kategori/teknoloji filtreli proje listesi |
 | Proje Detay | `/projeler/{slug}` | `/en/projects/{slug}` | Görsel, açıklama, tech stack, demo/GitHub linkleri |
 | Deneyim | `/deneyim` | `/en/experience` | İş deneyimi zaman çizelgesi + CV indirme |
@@ -280,7 +297,8 @@ id, key, value, created_at, updated_at
 ├── ⚡ Yetenekler            → Yetenek ekle/düzenle/sil (ad, kategori, ikon, sıra, aktif)
 ├── 📝 Blog                  → Blog yazısı ekle/düzenle/sil (TR+EN başlık/içerik/özet, görsel, yayın tarihi)
 ├── 📩 Mesajlar              → İletişim formu gelen kutusu (salt okunur, okunmamış rozeti)
-└── ⚙️ Site Ayarları         → Profil fotoğrafı, CV, hakkımda, hero, sosyal linkler, SEO
+├── ⚙️ Site Ayarları         → Profil fotoğrafı, CV, hakkımda, hero, sosyal linkler, SEO
+└── ⚙️ Hizmetler Sayfası     → /web-sitesi-hizmetleri içeriği: başlık/alt başlık/giriş, hizmet paketleri (repeater), "neden beni seçmelisiniz" (repeater), SSS (repeater), CTA — TR+EN
 ```
 
 - Admin paneli tamamen **Türkçe**.
@@ -295,18 +313,22 @@ id, key, value, created_at, updated_at
 - **Meta etiketler**: title, description (locale'e göre TR/EN), canonical, robots.
 - **hreflang**: her sayfada `<link rel="alternate" hreflang="tr">` + `<link rel="alternate" hreflang="en">`.
 - **Open Graph + Twitter Card**: `og:title`, `og:description`, `og:image`.
+- **Local SEO (Nazilli/Aydın web sitesi satışı odaklı)**:
+  - `geo.region` (`TR-09`), `geo.placename` (`Nazilli, Aydın`), `ICBM` meta etiketleri tüm sayfalarda (`layouts/app.blade.php`).
+  - `site_title`, `site_description_tr/en`, `hero_subtitle_tr/en`, `about_text_tr/en` ve `meta.site_name` "Nazilli web sitesi / web tasarım" anahtar kelimelerine odaklı şekilde güncellendi.
+  - Yeni **Hizmetler** sayfası (`/web-sitesi-hizmetleri`, `/en/website-services`) "Nazilli Web Sitesi Hizmetleri" anahtar kelimesine odaklı, paket/SSS/CTA içerikli landing page — admin panelden düzenlenebilir (bkz. `services_*` setting key'leri).
 - **JSON-LD**:
-  - Anasayfa: `Person` şeması (isim, unvan, sosyal linkler).
+  - Anasayfa: `Person` şeması (isim, unvan, sosyal linkler) + `ProfessionalService` şeması (adres: Nazilli/Aydın, `areaServed`, telefon, e-posta, `priceRange`).
+  - Hizmetler sayfası: `FAQPage` şeması (`services_faq_items_tr/en`'den üretilir).
   - Proje detay: `SoftwareSourceCode` veya `CreativeWork` şeması.
   - Blog detay: `BlogPosting` şeması.
-- **Sitemap**: Dinamik — TR ve EN URL'lerinin tamamı dahil.
+- **Sitemap**: Dinamik — TR ve EN URL'lerinin tamamı dahil (Hizmetler sayfası dahil).
 - **Robots**: Dinamik route.
 - **404**: Statik Apache fallback (`public/404.html`).
 
 ### 🚀 Gelecek SEO Geliştirmeleri (opsiyonel)
 
 - [ ] `BreadcrumbList` JSON-LD (proje/blog detay)
-- [ ] `FAQPage` JSON-LD (opsiyonel bir SSS bölümü eklenirse)
 - [ ] Google Analytics / GTM için `gtm_id` setting key'i
 
 ---
@@ -434,15 +456,22 @@ Lokal: `mysqldump --no-tablespaces` ile `.sql` al → cPanel phpMyAdmin → Impo
 
 > Her tamamlanan aşamadan sonra bu bölüm güncellenecek.
 
+### Tamamlananlar
+
+- [x] **APP_URL düzeltmesi**: `.env`'de `APP_URL=http://localhost` idi, `php artisan serve` ise `http://127.0.0.1:8000`'de çalışıyordu. Bu uyuşmazlık Filament FileUpload alanlarının (Site Ayarları, Projeler, Blog vb.) önizleme/boyut hesaplama isteklerinin yanlış origin'e gitmesine ve sonsuz "Yükleniyor / Boyut hesaplanıyor" spinner'ına sebep oluyordu. `APP_URL=http://127.0.0.1:8000` olarak güncellendi. ⚠️ Production'da `APP_URL` mutlaka gerçek domain ile eşleşmeli (`https://www.halilibrahimkocoglu.com.tr`).
+- [x] **Lokal veritabanı SQLite'tan MySQL'e geçirildi**: `portfolio` veritabanı ve `portfolio_user` kullanıcısı oluşturuldu, `.env` (`DB_CONNECTION=mysql`, `DB_HOST=127.0.0.1`, `DB_PORT=3306`, `DB_DATABASE=portfolio`, `DB_USERNAME=portfolio_user`, `DB_PASSWORD=sifre123`) güncellendi, `php artisan migrate:fresh --seed` çalıştırıldı.
+- [x] **Admin kullanıcısı oluşturuldu**: `tinker` ile `admin@test.com` / `admin123!` (DatabaseSeeder'da admin yok, güvenlik kontrolüne uygun — production'da farklı/güçlü bilgilerle elle oluşturulmalı).
+- [x] **Eski React + Vite projesi kaldırıldı**: Repo kökündeki eski React kaynak kodu (`src/`, `public/`, `index.html`, `dist/`, `vite.config.js`, `tailwind.config.cjs`, `postcss.config.cjs`, `eslint.config.js`, eski `package.json`/`package-lock.json`, `README.md`, `LICENSE`, `.gitignore`) silindi. Görseller ve PDF'ler zaten `storage/app/public/` altına taşınmış durumdaydı; eksik olan favicon varyantları (`favicon.png`, `favicon-apple.png`, `favicon.webp`) ve `projectplaceholderimage.webp` `public/` klasörüne kopyalandı.
+- [x] **`portfolio/` alt klasörü repo köküne taşındı**: Laravel projesi artık `portfolio/` alt klasöründe değil, doğrudan repo kökünde. `portfolio/` klasörü silindi.
+- [x] **Admin şifresi güncellendi**: Mevcut admin kullanıcısının (`halilkocoglu98@gmail.com`) şifresi `admin123!` olarak ayarlandı (geçici — production öncesi güçlü bir şifreyle değiştirilmeli).
+- [x] **Storage symlink düzeltildi**: `portfolio/` → root taşıması sonrası `public/storage` eski (`portfolio/storage/app/public`) yolu işaret ediyordu ve görseller kayboluyordu. `php artisan storage:link` ile yeniden oluşturuldu, artık `storage/app/public`'e doğru bağlanıyor.
+- [x] **SEO, Nazilli/Aydın web sitesi satışına odaklandı**: `site_title`, `site_description_tr/en`, `hero_subtitle_tr/en`, `about_text_tr/en` ve `meta.site_name` "Nazilli web sitesi / web tasarım" anahtar kelimelerine göre yeniden yazıldı; anasayfaya `ProfessionalService` JSON-LD (adres Nazilli/Aydın, `areaServed`, telefon/e-posta, `priceRange`) ve tüm sayfalara `geo.region` / `geo.placename` / `ICBM` meta etiketleri eklendi.
+- [x] **Yeni "Hizmetler" sayfası eklendi**: `/web-sitesi-hizmetleri` (TR) ve `/en/website-services` (EN) — `ServiceController`, `pages/services.blade.php`, navbar linki ve sitemap girişi eklendi. Sayfada hizmet paketleri, "neden beni seçmelisiniz" ve SSS (`FAQPage` JSON-LD) bölümleri var.
+- [x] **Hizmetler sayfası admin panelden düzenlenebilir hale getirildi**: Tüm içerik (`services_*` key'leri — başlıklar, paketler, "neden beni seçmelisiniz", SSS, CTA, TR+EN) `settings` tablosunda JSON olarak saklanıyor; yeni Filament sayfası **⚙️ Hizmetler Sayfası** (`app/Filament/Pages/ServicesSettings.php`) üzerinden repeater alanlarıyla yönetiliyor. Eski statik `lang/*/site.php` içindeki `services` blokları kaldırıldı.
+
+- [x] **Laravel 12 + Filament 3.3 proje kurulumu, migration'lar, modeller, middleware, seeder'lar, Filament Resources, public site (layout + tüm sayfalar) ve SEO (meta, hreflang, JSON-LD, sitemap, robots) tamamlandı.** (Detaylar yukarıdaki maddelerde.)
+
 ### Yapılacaklar
 
-- [ ] Laravel 12 + Filament 3.3 proje kurulumu
-- [ ] Migration'lar: `projects` → `experiences` → `skills` → `blog_posts` → `messages` → `settings`
-- [ ] Modeller + TR/EN accessor'ları
-- [ ] `SetLocale` middleware + route grubu
-- [ ] Seeder'lar (demo verilerle)
-- [ ] Filament Resources: Project, Experience, Skill, BlogPost, Message, SiteSettings
-- [ ] Public site: layout (navbar dil toggle dahil), tüm sayfalar
-- [ ] SEO: meta, hreflang, JSON-LD, sitemap (TR+EN), robots
 - [ ] `public/404.html` statik fallback
 - [ ] cPanel deploy + test
