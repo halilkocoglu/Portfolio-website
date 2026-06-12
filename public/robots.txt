@@ -1,6 +1,4 @@
 User-agent: *
-Allow: /
-Allow: /assets/
-Allow: /index.html
+Disallow: /admin
 
-Sitemap: https://halilibrahimkocoglu.com.tr/sitemap.xml
+Sitemap: /sitemap.xml
