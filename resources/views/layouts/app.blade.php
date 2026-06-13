@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#7c3aed">
 
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('favicon-apple.png') }}">
+
         <title>{{ $title ?? __('site.meta.site_name') }}</title>
         <meta name="description" content="{{ $description ?? \App\Models\Setting::get(app()->getLocale() === 'en' ? 'site_description_en' : 'site_description_tr') }}">
 
@@ -46,5 +49,6 @@
         </main>
 
         @include('partials.footer')
+        @include('partials.whatsapp-float')
     </body>
 </html>

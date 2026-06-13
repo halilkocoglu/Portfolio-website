@@ -20,6 +20,7 @@ class SettingSeeder extends Seeder
             'cv_file_en' => 'settings/Halil_Ibrahim_Kocoglu_EN.pdf',
             'email' => 'halilkocoglu98@gmail.com',
             'phone' => '+90 533 947 52 17',
+            'whatsapp_number' => '905339475217',
             'github_url' => 'https://github.com/halilkocoglu',
             'linkedin_url' => 'https://www.linkedin.com/in/halilkocoglu/',
             'twitter_url' => null,
@@ -28,6 +29,14 @@ class SettingSeeder extends Seeder
             'hero_title_en' => 'Halil İbrahim Koçoğlu',
             'hero_subtitle_tr' => 'Nazilli ve Aydın\'daki işletmeler için modern, hızlı ve SEO uyumlu web sitesi tasarımı; React ve Spring Boot ile özel yazılım çözümleri sunuyorum.',
             'hero_subtitle_en' => 'I design modern, fast and SEO-friendly websites for businesses in Nazilli and Aydın, plus custom software solutions using React and Spring Boot.',
+
+            // İletişim formu - proje türleri
+            'contact_project_types' => json_encode([
+                ['label_tr' => 'Kurumsal Web Sitesi', 'label_en' => 'Corporate Website'],
+                ['label_tr' => 'Mobil Uygulama', 'label_en' => 'Mobile App'],
+                ['label_tr' => 'Web Uygulaması', 'label_en' => 'Web Application'],
+                ['label_tr' => 'Diğer', 'label_en' => 'Other'],
+            ], JSON_UNESCAPED_UNICODE),
 
             // Hizmetler sayfası (TR)
             'services_title_tr' => 'Nazilli Web Sitesi Hizmetleri',

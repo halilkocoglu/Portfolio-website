@@ -10,6 +10,7 @@ class Message extends Model
         'name',
         'email',
         'phone',
+        'project_type',
         'subject',
         'message',
         'is_read',

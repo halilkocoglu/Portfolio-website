@@ -29,19 +29,33 @@ class SiteSettings extends Page implements HasForms
      */
     public array $data = [];
 
+    /**
+     * Setting key'leri JSON olarak saklanan repeater alanları.
+     *
+     * @var list<string>
+     */
+    protected array $jsonKeys = [
+        'contact_project_types',
+    ];
+
     public function mount(): void
     {
         $keys = [
             'site_title', 'site_description_tr', 'site_description_en',
             'profile_photo', 'about_text_tr', 'about_text_en',
             'cv_file_tr', 'cv_file_en',
-            'email', 'phone', 'github_url', 'linkedin_url', 'twitter_url',
+            'email', 'phone', 'whatsapp_number', 'github_url', 'linkedin_url', 'twitter_url',
             'og_image', 'hero_title_tr', 'hero_title_en',
             'hero_subtitle_tr', 'hero_subtitle_en',
+            'contact_project_types',
         ];
 
         foreach ($keys as $key) {
-            $this->data[$key] = Setting::get($key);
+            $value = Setting::get($key);
+
+            $this->data[$key] = in_array($key, $this->jsonKeys, true)
+                ? (json_decode((string) $value, true) ?? [])
+                : $value;
         }
 
         $this->form->fill($this->data);
@@ -114,6 +128,10 @@ class SiteSettings extends Page implements HasForms
                             ->email(),
                         Forms\Components\TextInput::make('phone')
                             ->label('Telefon'),
+                        Forms\Components\TextInput::make('whatsapp_number')
+                            ->label('WhatsApp Numarası')
+                            ->helperText('Ülke kodu ile birlikte, boşluksuz girin (örn. 905XXXXXXXXX).')
+                            ->tel(),
                         Forms\Components\TextInput::make('github_url')
                             ->label('GitHub URL')
                             ->url(),
@@ -124,6 +142,25 @@ class SiteSettings extends Page implements HasForms
                             ->label('Twitter/X URL')
                             ->url(),
                     ]),
+
+                Forms\Components\Section::make('İletişim Formu')
+                    ->description('İletişim formundaki "Proje Türü" alanında gösterilecek seçenekler (TR + EN).')
+                    ->schema([
+                        Forms\Components\Repeater::make('contact_project_types')
+                            ->label('Proje Türleri')
+                            ->schema([
+                                Forms\Components\TextInput::make('label_tr')
+                                    ->label('Etiket (TR)')
+                                    ->required(),
+                                Forms\Components\TextInput::make('label_en')
+                                    ->label('Etiket (EN)')
+                                    ->required(),
+                            ])
+                            ->columns(2)
+                            ->itemLabel(fn (array $state): ?string => $state['label_tr'] ?? null)
+                            ->collapsible()
+                            ->addActionLabel('Proje Türü Ekle'),
+                    ]),
             ])
             ->statePath('data');
     }
@@ -133,6 +170,10 @@ class SiteSettings extends Page implements HasForms
         $state = $this->form->getState();
 
         foreach ($state as $key => $value) {
+            if (in_array($key, $this->jsonKeys, true)) {
+                $value = json_encode(array_values($value), JSON_UNESCAPED_UNICODE);
+            }
+
             Setting::set($key, $value);
         }
 

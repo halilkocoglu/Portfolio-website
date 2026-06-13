@@ -153,6 +153,20 @@ sort_order
 created_at, updated_at
 ```
 
+### `project_images` — Proje Galeri Görselleri
+
+```
+id
+project_id                    # FK -> projects, cascade delete
+image                         # storage path
+caption_tr, caption_en        # opsiyonel açıklama (görsel altında gösterilir)
+sort_order
+created_at, updated_at
+```
+
+> Proje detay sayfasında kapak görseli dışında ek galeri görselleri gösterir. Admin panelde
+> proje formunun "Galeri" bölümünde `Repeater` ile yönetilir (sıralanabilir).
+
 ### `experiences` — İş Deneyimi
 
 ```
@@ -201,6 +215,7 @@ id
 name
 email
 phone                         # nullable
+project_type                  # nullable, contact_project_types setting'inden seçilir
 subject
 message
 is_read
@@ -229,6 +244,8 @@ id, key, value, created_at, updated_at
 | `cv_file` | İndirilebilir CV (PDF, storage path) |
 | `email` | E-posta |
 | `phone` | Telefon (opsiyonel) |
+| `whatsapp_number` | WhatsApp numarası (ülke kodu ile, ör. `905XXXXXXXXX`) — floating buton, proje kartları ve proje detay CTA'sında kullanılır |
+| `contact_project_types` | İletişim formu "Proje Türü" seçenekleri (JSON: `[{label_tr, label_en}]`, e-ticaret hariç) |
 | `github_url` | GitHub profil linki |
 | `linkedin_url` | LinkedIn profil linki |
 | `twitter_url` | Twitter/X profil linki (opsiyonel) |
@@ -468,8 +485,27 @@ Lokal: `mysqldump --no-tablespaces` ile `.sql` al → cPanel phpMyAdmin → Impo
 - [x] **SEO, Nazilli/Aydın web sitesi satışına odaklandı**: `site_title`, `site_description_tr/en`, `hero_subtitle_tr/en`, `about_text_tr/en` ve `meta.site_name` "Nazilli web sitesi / web tasarım" anahtar kelimelerine göre yeniden yazıldı; anasayfaya `ProfessionalService` JSON-LD (adres Nazilli/Aydın, `areaServed`, telefon/e-posta, `priceRange`) ve tüm sayfalara `geo.region` / `geo.placename` / `ICBM` meta etiketleri eklendi.
 - [x] **Yeni "Hizmetler" sayfası eklendi**: `/web-sitesi-hizmetleri` (TR) ve `/en/website-services` (EN) — `ServiceController`, `pages/services.blade.php`, navbar linki ve sitemap girişi eklendi. Sayfada hizmet paketleri, "neden beni seçmelisiniz" ve SSS (`FAQPage` JSON-LD) bölümleri var.
 - [x] **Hizmetler sayfası admin panelden düzenlenebilir hale getirildi**: Tüm içerik (`services_*` key'leri — başlıklar, paketler, "neden beni seçmelisiniz", SSS, CTA, TR+EN) `settings` tablosunda JSON olarak saklanıyor; yeni Filament sayfası **⚙️ Hizmetler Sayfası** (`app/Filament/Pages/ServicesSettings.php`) üzerinden repeater alanlarıyla yönetiliyor. Eski statik `lang/*/site.php` içindeki `services` blokları kaldırıldı.
+- [x] **WhatsApp iletişimi eklendi**:
+  - Yeni `whatsapp_number` setting key'i (`SettingSeeder`'a ve `settings` tablosuna eklendi, admin panelden **⚙️ Site Ayarları → İletişim & Sosyal Medya** bölümünden düzenlenebilir).
+  - `whatsapp_url(?string $message = null)` helper'ı (`app/Support/helpers.php`) numarayı sanitize edip wa.me linki üretiyor, mesaj varsa URL-encode ediyor.
+  - `<x-icons.whatsapp>` ikon bileşeni eklendi (`resources/views/components/icons/whatsapp.blade.php`).
+  - Sitenin tüm sayfalarında sağ altta floating WhatsApp butonu (`resources/views/partials/whatsapp-float.blade.php`, `layouts/app.blade.php`'e dahil edildi) — genel bilgi mesajı (`site.whatsapp.float_message`) ile açılıyor.
+  - Proje kartlarında (`partials/project-card.blade.php`) GitHub butonunun yanına WhatsApp ikon butonu eklendi — proje adını içeren otomatik mesajla (`site.whatsapp.project_message`) açılıyor.
+  - Proje detay sayfasında (`pages/projects/show.blade.php`) "Benzer Bir Proje mi İstiyorsunuz?" başlıklı WhatsApp CTA bölümü eklendi.
+  - TR/EN `lang/*/site.php` dosyalarına `whatsapp` çeviri bloğu eklendi (`label`, `float_message`, `project_message`, `cta_title`, `cta_subtitle`, `cta_button`).
+- [x] **İletişim formuna "Proje Türü" alanı eklendi**:
+  - `messages` tablosuna nullable `project_type` kolonu eklendi (migration `2026_06_13_000000_add_project_type_to_messages_table`), `Message` modelinin `fillable`'ına eklendi.
+  - Yeni `contact_project_types` setting key'i — JSON array (`[{label_tr, label_en}, ...]`), admin panelde **⚙️ Site Ayarları → İletişim Formu** bölümünden Filament `Repeater` ile yönetiliyor (e-ticaret hariç; varsayılan: Kurumsal Web Sitesi, Mobil Uygulama, Web Uygulaması, Diğer).
+  - `ContactController`: `projectTypes()` aktif locale'e göre etiketleri döner, `/iletisim` formunda `project_type` `select` alanı olarak gösterilir (opsiyonel), `store()` içinde `in:` kuralıyla doğrulanır.
+  - `/iletisim` ve `/en/contact` sayfalarında "Proje Türü" `select` alanı eklendi (`pages/contact.blade.php`), `lang/*/site.php`'ye `contact.project_type` / `contact.project_type_placeholder` çevirileri eklendi.
+  - Admin panel **📩 Mesajlar** bölümünde (`MessageResource`) tablo ve detay formuna salt okunur "Proje Türü" kolonu/alanı eklendi (badge olarak gösteriliyor).
 
 - [x] **Laravel 12 + Filament 3.3 proje kurulumu, migration'lar, modeller, middleware, seeder'lar, Filament Resources, public site (layout + tüm sayfalar) ve SEO (meta, hreflang, JSON-LD, sitemap, robots) tamamlandı.** (Detaylar yukarıdaki maddelerde.)
+
+- [x] **Proje detay galerisi eklendi**: Yeni `project_images` tablosu (migration `2026_06_13_000001_create_project_images_table`) ve `ProjectImage` modeli (`caption_tr`/`caption_en` ile `HasLocaleFields`). `Project::images()` ilişkisi (`sort_order`'a göre).
+- [x] **Kapak görseli galeriden seçiliyor**: Ayrı "Kapak Görseli" yükleme alanı kaldırıldı. Admin panelde **🗂️ Projeler** formunda tek bir "Görseller" `Repeater`'ı var — birden fazla görsel yüklenebilir, her birine isteğe bağlı başlık ve açıklama eklenebilir, ok butonlarıyla sıralanabilir. Her görselde **"Kapak Görseli Olarak Kullan"** toggle'ı var (`project_images.is_cover`, tek seçim — biri işaretlenince diğerleri otomatik kapanır). `Project::cover_image` accessor önce `is_cover=true` görseli, yoksa ilk sıradaki görseli, galeri boşsa eski `image` kolonunu (geriye dönük uyumluluk) döner. Mobil önizleme görseli (`mobile_image`) ayrı ve tek görsel olarak kalır. Proje kartları (`project-card.blade.php`), anasayfa öne çıkan projeler ve admin tablo kolonu `cover_image`'i kullanır.
+- [x] **Galeri görsellerine başlık alanı eklendi**: `project_images` tablosuna `title_tr`/`title_en` kolonları eklendi (migration `2026_06_13_000002_add_title_and_cover_to_project_images_table`), `ProjectImage` modelinde `title` accessor (`HasLocaleFields`). Admin panelde her galeri görseli için açıklamanın üstünde başlık (TR/EN) alanı var.
+- [x] **Proje detay sayfasında galeri carousel'i**: `pages/projects/show.blade.php`'de kapak görseli yerine tüm galeri görsellerini gösteren, sağ/sol ok butonları ve nokta göstergeleriyle gezilebilen bir carousel (`resources/js/app.js` — `.project-gallery` vanilla JS). Her görselin altında varsa başlığı (kalın) ve açıklaması gösteriliyor. Galeri boşsa eski `cover_image`'e (tekil görsel) fallback yapılıyor.
 
 ### Yapılacaklar
 

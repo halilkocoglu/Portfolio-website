@@ -76,7 +76,16 @@ class BlogPost extends Model
     {
         static::saving(function (BlogPost $post) {
             if (blank($post->slug) && filled($post->title_tr)) {
-                $post->slug = Str::slug($post->title_tr);
+                $slug = Str::slug($post->title_tr);
+                $original = $slug;
+                $suffix = 2;
+
+                while (static::where('slug', $slug)->where('id', '!=', $post->id ?? 0)->exists()) {
+                    $slug = "{$original}-{$suffix}";
+                    $suffix++;
+                }
+
+                $post->slug = $slug;
             }
         });
     }

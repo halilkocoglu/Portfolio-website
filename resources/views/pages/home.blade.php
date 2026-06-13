@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $title = \App\Models\Setting::get(app()->getLocale() === 'en' ? 'hero_title_en' : 'hero_title_tr') . ' — ' . __('site.hero.badge');
+    $title = \App\Models\Setting::get(app()->getLocale() === 'en' ? 'hero_title_en' : 'hero_title_tr') . ' | ' . __('site.meta.site_name');
     $description = \App\Models\Setting::get(app()->getLocale() === 'en' ? 'site_description_en' : 'site_description_tr');
     $hreflang = [
         'tr' => route('home'),

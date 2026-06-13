@@ -41,6 +41,9 @@ class MessageResource extends Resource
                     ->label('Telefon')
                     ->tel()
                     ->disabled(),
+                Forms\Components\TextInput::make('project_type')
+                    ->label('Proje Türü')
+                    ->disabled(),
                 Forms\Components\TextInput::make('subject')
                     ->label('Konu')
                     ->required()
@@ -64,6 +67,11 @@ class MessageResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->label('E-posta')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('project_type')
+                    ->label('Proje Türü')
+                    ->badge()
+                    ->placeholder('—')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('subject')
                     ->label('Konu')

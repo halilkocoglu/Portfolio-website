@@ -29,7 +29,7 @@ return [
 
     'projects' => [
         'title' => 'Projects',
-        'subtitle' => 'Custom Software Solutions & Web Applications',
+        'subtitle' => 'Custom Software Solutions & Web Applications for Businesses in Nazilli and Aydın',
         'view_details' => 'Project Details',
         'visit_site' => 'Visit Site',
         'live' => 'Live',
@@ -39,12 +39,16 @@ return [
         'category_api' => 'API',
         'category_other' => 'Other',
         'tech_stack' => 'Tech Stack',
+        'gallery' => 'Gallery',
+        'prev_image' => 'Previous image',
+        'next_image' => 'Next image',
+        'go_to_image' => 'Go to image :number',
         'breadcrumb_home' => 'Home',
     ],
 
     'experience' => [
         'title' => 'Experience',
-        'subtitle' => 'Professional Software Engineering & Technical Solutions',
+        'subtitle' => 'Professional Software Engineering & Technical Solutions in Nazilli and Aydın',
         'present' => 'Present',
         'download_cv' => 'Download CV',
     ],
@@ -74,6 +78,8 @@ return [
         'name' => 'Full Name',
         'email' => 'Email',
         'phone' => 'Phone',
+        'project_type' => 'Project Type',
+        'project_type_placeholder' => 'Select (optional)',
         'subject' => 'Subject',
         'message' => 'Message',
         'send' => 'Send',
@@ -87,6 +93,15 @@ return [
         'rights' => 'All rights reserved.',
         'tagline' => 'Professional Web Design & Software Solutions',
         'made_with' => 'Crafted with',
+    ],
+
+    'whatsapp' => [
+        'label' => 'WhatsApp',
+        'float_message' => 'Hi, I would like to get information about a website.',
+        'project_message' => 'Hi, I would like to get information about a website like the ":project" project.',
+        'cta_title' => 'Want a Similar Project?',
+        'cta_subtitle' => 'Get in touch on WhatsApp for a website like this one.',
+        'cta_button' => 'Message on WhatsApp',
     ],
 
     'home' => [

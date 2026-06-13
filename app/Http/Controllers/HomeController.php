@@ -11,6 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $featuredProjects = Project::query()
+            ->with('images')
             ->where('is_active', true)
             ->where('is_featured', true)
             ->orderBy('sort_order')

@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div class="h-36 overflow-hidden">
-                    @if ($project->image)
-                        <img loading="lazy" decoding="async" src="{{ \Illuminate\Support\Facades\Storage::url($project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover object-top">
+                    @if ($project->cover_image)
+                        <img loading="lazy" decoding="async" src="{{ \Illuminate\Support\Facades\Storage::url($project->cover_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover object-top">
                     @endif
                 </div>
             </div>
@@ -28,8 +28,8 @@
                     <div class="w-7 h-1.5 bg-slate-400 rounded-full"></div>
                 </div>
                 <div class="overflow-hidden bg-white" style="height: 96px;">
-                    @if ($project->mobile_image || $project->image)
-                        <img loading="lazy" decoding="async" src="{{ \Illuminate\Support\Facades\Storage::url($project->mobile_image ?? $project->image) }}" alt="" class="w-full h-full object-cover object-top">
+                    @if ($project->mobile_image || $project->cover_image)
+                        <img loading="lazy" decoding="async" src="{{ \Illuminate\Support\Facades\Storage::url($project->mobile_image ?? $project->cover_image) }}" alt="" class="w-full h-full object-cover object-top">
                     @endif
                 </div>
                 <div class="h-4 bg-slate-200 flex items-center justify-center">
@@ -39,8 +39,8 @@
         </div>
     @else
         <div class="relative h-44 overflow-hidden bg-slate-100">
-            @if ($project->image)
-                <img loading="lazy" decoding="async" src="{{ \Illuminate\Support\Facades\Storage::url($project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            @if ($project->cover_image)
+                <img loading="lazy" decoding="async" src="{{ \Illuminate\Support\Facades\Storage::url($project->cover_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             @endif
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent"></div>
         </div>
@@ -79,6 +79,13 @@
                     <span class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-slate-200 text-slate-700 text-sm font-semibold hover:border-violet-400 hover:text-violet-700 hover:bg-violet-50 transition-all active:scale-95 {{ $project->live_url ? '' : 'w-full' }}">
                         <x-icons.github class="w-[15px] h-[15px]" />
                         {{ $project->live_url ? 'GitHub' : __('site.projects.view_details') }}
+                    </span>
+                </a>
+            @endif
+            @if ($whatsappUrl = whatsapp_url(__('site.whatsapp.project_message', ['project' => $project->title])))
+                <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" aria-label="{{ __('site.whatsapp.label') }}">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl border-2 border-slate-200 text-[#25D366] hover:border-[#25D366] hover:bg-[#25D366]/10 transition-all active:scale-95">
+                        <x-icons.whatsapp class="w-[18px] h-[18px]" />
                     </span>
                 </a>
             @endif

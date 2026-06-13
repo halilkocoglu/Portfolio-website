@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 
 class BlogPostResource extends Resource
 {
@@ -34,16 +33,9 @@ class BlogPostResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('title_tr')
                             ->label('Başlık (TR)')
-                            ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Forms\Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                            ->required(),
                         Forms\Components\TextInput::make('title_en')
                             ->label('Başlık (EN)'),
-                        Forms\Components\TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->unique(ignoreRecord: true)
-                            ->columnSpanFull(),
                         Forms\Components\Textarea::make('excerpt_tr')
                             ->label('Özet (TR)')
                             ->columnSpanFull(),

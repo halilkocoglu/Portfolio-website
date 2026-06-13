@@ -32,6 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    document.querySelectorAll('.project-gallery').forEach((gallery) => {
+        const slides = gallery.querySelectorAll('.project-gallery-slide');
+        const dots = gallery.querySelectorAll('.project-gallery-dot');
+        let current = 0;
+
+        const show = (index) => {
+            current = (index + slides.length) % slides.length;
+            slides.forEach((slide, i) => slide.classList.toggle('hidden', i !== current));
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('bg-white', i === current);
+                dot.classList.toggle('bg-white/40', i !== current);
+            });
+        };
+
+        gallery.querySelector('.project-gallery-prev')?.addEventListener('click', () => show(current - 1));
+        gallery.querySelector('.project-gallery-next')?.addEventListener('click', () => show(current + 1));
+        dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+    });
+
     document.querySelectorAll('[data-copy]').forEach((el) => {
         el.addEventListener('click', () => {
             const value = el.getAttribute('data-copy');

@@ -9,7 +9,7 @@ class ProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Project::query()->where('is_active', true)->orderBy('sort_order');
+        $query = Project::query()->with('images')->where('is_active', true)->orderBy('sort_order');
 
         if ($category = $request->query('category')) {
             $query->where('category', $category);
@@ -26,6 +26,7 @@ class ProjectController extends Controller
     public function show(string $slug)
     {
         $project = Project::query()
+            ->with('images')
             ->where('slug', $slug)
             ->where('is_active', true)
             ->firstOrFail();

@@ -86,6 +86,18 @@
                         <input type="text" name="phone" value="{{ old('phone') }}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none transition-all bg-white/70 text-sm">
                         @error('phone') <p class="text-pink-600 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
+                    @if (!empty($projectTypes))
+                        <div>
+                            <label class="block text-slate-700 text-sm font-semibold mb-1.5">{{ __('site.contact.project_type') }}</label>
+                            <select name="project_type" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none transition-all bg-white/70 text-sm">
+                                <option value="">{{ __('site.contact.project_type_placeholder') }}</option>
+                                @foreach ($projectTypes as $type)
+                                    <option value="{{ $type['label'] }}" @selected(old('project_type') === $type['label'])>{{ $type['label'] }}</option>
+                                @endforeach
+                            </select>
+                            @error('project_type') <p class="text-pink-600 text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+                    @endif
                     <div>
                         <label class="block text-slate-700 text-sm font-semibold mb-1.5">{{ __('site.contact.subject') }}</label>
                         <input type="text" name="subject" value="{{ old('subject') }}" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none transition-all bg-white/70 text-sm">

@@ -29,7 +29,7 @@ return [
 
     'projects' => [
         'title' => 'Projeler',
-        'subtitle' => 'Özel Yazılım Çözümleri ve Web Uygulamaları',
+        'subtitle' => 'Nazilli ve Aydın\'daki İşletmeler İçin Geliştirdiğim Özel Yazılım Çözümleri ve Web Uygulamaları',
         'view_details' => 'Proje Detayları',
         'visit_site' => 'Siteyi Ziyaret Et',
         'live' => 'Canlı',
@@ -39,12 +39,16 @@ return [
         'category_api' => 'API',
         'category_other' => 'Diğer',
         'tech_stack' => 'Kullanılan Teknolojiler',
+        'gallery' => 'Görseller',
+        'prev_image' => 'Önceki görsel',
+        'next_image' => 'Sonraki görsel',
+        'go_to_image' => ':number. görsele git',
         'breadcrumb_home' => 'Ana Sayfa',
     ],
 
     'experience' => [
         'title' => 'Deneyim',
-        'subtitle' => 'Profesyonel Yazılım Mühendisliği ve Teknik Çözümler',
+        'subtitle' => 'Nazilli ve Aydın\'da Profesyonel Yazılım Mühendisliği ve Teknik Çözümler',
         'present' => 'Şu an',
         'download_cv' => 'CV İndir',
     ],
@@ -74,6 +78,8 @@ return [
         'name' => 'Ad Soyad',
         'email' => 'E-posta',
         'phone' => 'Telefon',
+        'project_type' => 'Proje Türü',
+        'project_type_placeholder' => 'Seçiniz (opsiyonel)',
         'subject' => 'Konu',
         'message' => 'Mesaj',
         'send' => 'Gönder',
@@ -87,6 +93,15 @@ return [
         'rights' => 'Tüm hakları saklıdır.',
         'tagline' => 'Profesyonel Web Tasarım ve Yazılım Çözümleri',
         'made_with' => 'ile geliştirildi',
+    ],
+
+    'whatsapp' => [
+        'label' => 'WhatsApp',
+        'float_message' => 'Merhaba, web sitesi hakkında bilgi almak istiyorum.',
+        'project_message' => 'Merhaba, ":project" projesi gibi bir web sitesi hakkında bilgi almak istiyorum.',
+        'cta_title' => 'Benzer Bir Proje mi İstiyorsunuz?',
+        'cta_subtitle' => 'Bu proje gibi bir web sitesi için hemen WhatsApp üzerinden iletişime geçin.',
+        'cta_button' => 'WhatsApp\'tan Yaz',
     ],
 
     'home' => [
